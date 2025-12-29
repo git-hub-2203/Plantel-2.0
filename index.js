@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // --- 1. INICIALIZAR ÍCONES ---
     if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
 
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- 4. SMOOTH SCROLL (SEU ORIGINAL) ---
     document.querySelectorAll('.menu a, .mobile-link').forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
             const sectionId = this.getAttribute('href');
             const section = document.querySelector(sectionId);
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (targetSection) counterObserver.observe(targetSection);
 
     // --- 7. PARALLAX NO SOBRE (SEU ORIGINAL) ---
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         const parallax = document.querySelector('#sobre');
         if (parallax) {
             let offset = window.pageYOffset;
@@ -148,14 +148,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- 8. BOTÃO VOLTAR AO TOPO (SEU ORIGINAL) ---
     const backToTopButton = document.querySelector("#backToTop");
     if (backToTopButton) {
-        window.addEventListener("scroll", function() {
+        window.addEventListener("scroll", function () {
             if (window.pageYOffset > 400) {
                 backToTopButton.classList.add("show");
             } else {
                 backToTopButton.classList.remove("show");
             }
         });
-        backToTopButton.addEventListener("click", function() {
+        backToTopButton.addEventListener("click", function () {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // 3. Botão Voltar ao Topo (com checagem)
 const backToTopButton = document.querySelector("#backToTop");
 if (backToTopButton) {
-    window.addEventListener("scroll", function() {
+    window.addEventListener("scroll", function () {
         if (window.pageYOffset > 400) {
             backToTopButton.classList.add("show");
         } else {
@@ -200,7 +200,7 @@ if (backToTopButton) {
         }
     });
 
-    backToTopButton.addEventListener("click", function() {
+    backToTopButton.addEventListener("click", function () {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
@@ -208,7 +208,7 @@ if (backToTopButton) {
 // 4. Contadores (startCounting)
 const startCounting = () => {
     const counters = document.querySelectorAll('.count-up');
-    
+
     counters.forEach(counter => {
         const target = +counter.getAttribute('data-target');
         const updateCount = () => {
