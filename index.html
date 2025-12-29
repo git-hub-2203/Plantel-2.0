@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantel de Dúvidas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/LogoPlant.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- LOGO + MENU -->
+   <header>
+    <img src="images/LogoPlantnoHeader.png" alt="Logo" class="logo">
+
+    <nav class="menu">
+        <a href="#sobre">Sobre o Plantel ∑</a>
+        <a href="#comunidades">Comunidades ɸ</a>
+        <a href="#redes">Redes Sociais Ψ</a>
+        <a href="#parceiros">Parceiros λ</a>
+    </nav>
+
+    <div class="dark-mode-container">
+    <button id="dark-mode-toggle" type="button" title="Alternar tema">
+    <i data-lucide="moon" id="moon-icon"></i>
+</button>
+    </div>
+
+    <a id="link" target="_blank" href="https://chat.whatsapp.com/KMwYVUctbqh1sPtlhcs3ip" rel="noopener noreferrer">
+        <img src="images/LogoZap.png" id="logo-header-zap" alt="Logo WhatsApp">
+        <h3>Comunidades <br>no WhatsApp!</h3>
+    </a>
+
+    <!-- Hamburger (mobile) -->
+    <button id="hamburger" class="hamburger" type="button" aria-label="Abrir menu">
+        <span class="bar"></span>
+    </button>
+
+    <!-- Mobile menu (slide down) -->
+    <nav id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <div class="inner">
+            <a href="#sobre" class="mobile-link">Sobre</a>
+            <a href="#comunidades" class="mobile-link">Comunidades</a>
+            <a href="#redes" class="mobile-link">Redes Sociais</a>
+            <a href="#parceiros" class="mobile-link">Parceiros</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Social floating buttons (mobile) -->
+<div class="social-fab" aria-hidden="false">
+    <button id="social-toggle" class="social-toggle" type="button" aria-label="Abrir redes">≡</button>
+    <div id="social-actions" class="social-actions" aria-hidden="true">
+        <a href="https://www.instagram.com/planteldeduvidas/" target="_blank" rel="noopener noreferrer" class="social-btn instagram" aria-label="Instagram">
+            <img src="images/instaLogo.png" alt="Instagram">
+        </a>
+        <a href="https://discord.com/" target="_blank" rel="noopener noreferrer" class="social-btn discord" aria-label="Discord">
+            <img src="images/discordLogo.png" alt="Discord">
+        </a>
+        <a href="https://www.youtube.com/@PlanteldeDuvidas" target="_blank" rel="noopener noreferrer" class="social-btn youtube" aria-label="YouTube">
+            <img src="images/youtubeLogo.png" alt="YouTube">
+        </a>
+        <a href="https://chat.whatsapp.com/KMwYVUctbqh1sPtlhcs3ip" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp" aria-label="WhatsApp">
+            <img src="images/LogoZap.png" alt="WhatsApp">
+        </a>
+    </div>
+</div>
+
+    <!-- HERO COM BANDEIRA + FRASE -->
+    <section class="hero">
+        <div class="title">
+            <h1>Plantel de Dúvidas</h1>
+        </div>
+        <div class="frase-kant">
+            "O ser humano é aquilo que a educação faz dele"  
+            <br> — Immanuel Kant
+        </div>
+    </section>
+    
+    <!-- SEÇÕES -->
+    <main>
+    <section id="sobre" class="secao">
+        <h2>Sobre o Plantel</h2>
+        <div class="line"></div>
+        <p class="text-info-out">
+            O Plantel é uma rede educacional gratuita de apoio acadêmico que conecta alunos e professores para resolver dúvidas, compartilhar conhecimento e fortalecer os estudos. Atuamos onde o ensino tradicional não alcança, colocando a dúvida no centro do aprendizado e promovendo uma comunidade colaborativa, estratégica e focada em alto rendimento e preparação para provas.
+        </p>
+    </section>
+
+    <section id="comunidades" class="secao">
+        <h2>Comunidades</h2>
+        <div class="line"></div>
+        <div class="container-numbers">
+    <div class="numbers">
+        <div class="numbers-text">+<span class="count-up" data-target="3000">0</span></div>
+        <div class="numbers-text-label">membros</div>
+    </div>
+
+    <div class="numbers">
+        <div class="numbers-text"><span class="count-up" data-target="2">0</span></div>
+        <div class="numbers-text-label">comunidades</div>
+    </div>
+
+    <div class="numbers">
+        <div class="numbers-text"><span class="count-up" data-target="16">0</span></div>
+        <div class="numbers-text-label">grupos</div>
+    </div>
+</div>
+
+        <p class="text-info-out">
+            Por meio das nossas comunidades, conseguimos proporcionar as mais diversas ajudas ao estudante, 
+            sanar dúvidas, oferecer materias de qualidade, apoio dos professores e dos monitores de plantão, 
+            networking com aprovados e muito mais.
+        </p>
+        <div class="container-comunidades">
+            <div class="box-comunidade">
+                <div class="box-comunidade-top">
+                    <img src="images/LogoExatas.png" class="logo-comunidade" alt="Logo Plantel de Exatas">
+                    <h3 class="text-info-in">Plantel de Exatas 🔢</h3>
+                </div>
+                <p class="text-info-in-inside">
+                    Comunidade colaborativa das ciências exatas onde todos têm voz e espaço para aprender. 
+                    Dúvidas são o ponto de partida para debates ricos e acessíveis.
+                </p>
+                <p class="text-info-in-inside">
+                    ✅ Apoio dos professores qualificados<br>
+                    ✅ Monitores de plantão<br>
+                    ✅ Resolução colaborativa
+                </p>
+            </div> 
+            <div class="box-comunidade">
+                <div class="box-comunidade-top">
+                    <img src="images/LogoListas.png" class="logo-comunidade" alt="Logo Plantel Listas">
+                    <h3 class="text-info-in">Plantel Listas 📚</h3>
+                </div>
+                <p class="text-info-in-inside">
+                    "A aura do Plantel". Caminho máximo para quem busca materiais de qualidade para se aprofundar e praticar os estudos nos mais diversos assuntos dos vestibulares.
+                </p>
+                <div class="box-comunidade-listas-efeito">
+                    <p class="text-info-in-inside">
+                        ☁️ DRIVE do Plantel Listas 📖<br>
+                        Todos os conteúdos reunidos em um só lugar!<br>
+                        Confira na bio do instagram.<br>
+                        ✅ + 300 listas organizadas por assunto<br>
+                        ✅ Provas de várias bancas militares<br>
+                        ✅ Materiais de professores parceiros<br>
+                        ✅ Tudo atualizado e 100% gratuito
+                    </p>
+                </div>
+            </div>
+
+            <div class="box-comunidade">
+                <div class="box-comunidade-top">
+                    <img src="images/LogoExatas.png" class="logo-comunidade" alt="Logo Plantel de Redação">
+                    <h3 class="text-info-in">Plantel de Redação ✍️</h3>
+                </div>
+                <p class="text-info-in-inside">
+                    Comunidade colaborativa das ciências exatas onde todos têm voz e espaço para aprender. 
+                    Dúvidas são o ponto de partida para debates ricos e acessíveis.
+                </p>
+                <p class="text-info-in-inside">
+                    ✅ Apoio dos professores qualificados<br>
+                    ✅ Monitores de plantão<br>
+                    ✅ Resolução colaborativa
+                </p>
+            </div>
+        <div class="box-comunidade">
+                <div class="box-comunidade-top">
+                    <img src="images/LogoCalculo.png" class="logo-comunidade" alt="Logo Plantel Militares Cálculo">
+                    <h3 class="text-info-in">Plantel Militares: Cálculo</h3>
+                </div>
+                <p class="text-info-in-inside">
+                    Promover debates e resoluções de questões envolvendo Cálculo voltadas para os concursos militares.<br><br>
+                    ✅ EFOMM<br>
+                    ✅ Escola Naval<br>
+                    ✅ ITA<br>
+                    ✅ IME
+                </p>
+            </div>
+            <div class="box-comunidade">
+                <div class="box-comunidade-top">
+                    <img src="images/LogoExatas.png" class="logo-comunidade" alt="Logo Plantel de Humanas e Linguagens">
+                    <h3 class="text-info-in">Plantel de Humanas e Linguagens 🌎</h3>
+                </div>
+                <p class="text-info-in-inside">
+                    Enfoque na resolução de questões das Escolas Militares e Vestibulares de modo geral.<br><br> 
+                    ✅ EsPCEx<br>
+                    ✅ ESA<br>
+                    ✅ Colégio Naval<br>
+                    ✅ Demais vestibulares
+                </p>
+            </div>
+            <div class="box-comunidade">
+                <div class="box-comunidade-top">
+                    <img src="images/LogoExatas.png" class="logo-comunidade" alt="Logo Plantel Compra/Vendas">
+                    <h3 class="text-info-in">Plantel: Compra/Vendas de materiais 🤝</h3>
+                </div>
+                <p class="text-info-in-inside">
+                    Espaço de divulgação de materiais relativos ao campo dos estudos: livros, mesas digitalizadoras, tablets e etc.
+                </p>
+                <div class="box-comunidade-listas-efeito">
+                    <p class="text-info-in-inside">
+                        🚫 Não nos responsabilizamos por golpes ou coisas do gênero.<br>
+                        ✅ Realizem transações em plataformas de confiança, pois haverá seguro contra golpe.
+                    </p>
+                </div>
+            </div>
+            <div class="box-comunidade">
+                <div class="box-comunidade-top">
+                    <img src="images/LogoIteano.png" class="logo-comunidade" alt="Logo Grupo Pré-Iteanos">
+                    <h3 class="text-info-in">Grupo Pré-Iteanos ✈️</h3>
+                </div>
+                <p class="text-info-in-inside">
+                    Enfoque na resolução de questões de ITA/IME + Networking.<br><br>
+                    ✅ + 580 membros<br>
+                    ✅ Questões para investir fosfato 🔥
+                </p>
+            </div>
+            <div class="box-comunidade">
+                <div class="box-comunidade-top">
+                    <img src="images/LogoExatas.png" class="logo-comunidade" alt="Logo Plantel Networking">
+                    <h3 class="text-info-in">Plantel Networking 💬</h3>
+                </div>
+                <p class="text-info-in-inside">
+                    Esclarecer dúvidas gerais sobre concursos e estudos, com espaço para conversas moderadas e saudáveis.<br><br>
+                    ✅ + 250 membros
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="redes" class="secao">
+        <h2>Redes Sociais</h2>
+        <div class="line"></div>
+        <p class="text-info-out">Links e redes aqui</p>
+    </section>
+
+    <section id="parceiros" class="secao">
+        <h2>Parceiros</h2>
+        <div class="line"></div>
+        <p class="text-info-out">Parceiros aqui</p>
+    </section>
+
+    </main>
+
+<button id="backToTop" type="button" title="Voltar ao topo">↑</button>
+
+ <!--Menu-->
+   <nav class="navbar" id="redes">
+  <ul>
+    <li>
+      <a href="https://www.instagram.com/planteldeduvidas/" target="_blank" rel="noopener noreferrer">
+        <img src="images/insta.png" alt="Instagram">
+        <span>Instagram</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://discord.com/invite/amvbHNjG..." target="_blank" rel="noopener noreferrer">
+        <img src="images/discord.png" alt="Discord">
+        <span>Discord</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.youtube.com/@PlanteldeDuvidas" target="_blank" rel="noopener noreferrer">
+        <img src="images/youtube.png" alt="YouTube">
+        <span>Youtube</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="index.js"></script>
+
+    <!-- FOOTER -->
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+                <img src="images/LogoPlantnoHeader.png" alt="Logo Plantel de Dúvidas" class="footer-logo">
+                <p>Transformando a educação através da colaboração.</p>
+            </div>
+        
+        <div class="footer-links">
+            <h4>Navegação</h4>
+            <a href="#sobre">Sobre</a>
+            <a href="#comunidades">Comunidades</a>
+            <a href="#redes">Redes Sociais</a>
+        </div>
+
+        <div class="footer-contact">
+            <h4>Contato</h4>
+            <p>contato@plantel.com.br</p>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2025 Plantel de Dúvidas. Todos os direitos reservados.</p>
+        <p class="dev-team">Desenvolvido pela Equipe de Desenvolvimento do Plantel de Dúvidas</p>
+    </div>
+</footer>
+</body>
+
+</html>
