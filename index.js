@@ -108,33 +108,39 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // --- 6. CONTADORES (SEU ORIGINAL) ---
-    const startCounting = () => {
-        const counters = document.querySelectorAll('.count-up');
-        counters.forEach(counter => {
-            const target = +counter.getAttribute('data-target');
-            const updateCount = () => {
-                const count = +counter.innerText;
-                const increment = target / 100;
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + increment);
-                    setTimeout(updateCount, 20);
-                } else {
-                    counter.innerText = target;
+   const startCounting = () => {
+    const counters = document.querySelectorAll('.count-up');
+    
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const updateCount = () => {
+            const count = +counter.getAttribute('data-current') || 0;
+            const increment = target / 80; // Velocidade da animação
+
+            if (count < target) {
+                const nextCount = count + increment;
+                counter.setAttribute('data-current', nextCount);
+                
+                // Lógica para formatar 1300 -> 1.3k
+                let displayValue = Math.ceil(nextCount);
+                if (displayValue >= 1000) {
+                    displayValue = (displayValue / 1000).toFixed(1) + 'k';
                 }
-            };
-            updateCount();
-        });
-    };
-
-    const counterObserver = new IntersectionObserver((entries, obs) => {
-        if (entries[0].isIntersecting) {
-            startCounting();
-            obs.disconnect();
-        }
-    }, { threshold: 0.5 });
-
-    const targetSection = document.querySelector('.container-numbers');
-    if (targetSection) counterObserver.observe(targetSection);
+                
+                counter.innerText = displayValue;
+                setTimeout(updateCount, 25);
+            } else {
+                // Valor final formatado
+                let finalValue = target;
+                if (target >= 1000) {
+                    finalValue = (target / 1000).toFixed(1) + 'k';
+                }
+                counter.innerText = finalValue;
+            }
+        };
+        updateCount();
+    });
+};
 
     // --- 7. PARALLAX NO SOBRE (SEU ORIGINAL) ---
     window.addEventListener('scroll', function () {
