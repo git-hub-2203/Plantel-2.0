@@ -391,7 +391,7 @@ body.dark-theme .text-info-in-inside {
                 box-shadow 0.3s ease, 
                 border-color 0.3s ease;
     border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    box-shadow: var(--shadow);
 }
 
 .box-redes:hover{
@@ -405,6 +405,7 @@ body.dark-theme .text-info-in-inside {
     margin: auto;
     padding-top: 10px;
 }
+
 
 /* Responsividade para Celulares */
 @media (max-width: 768px) {
