@@ -12,6 +12,7 @@
     --white: #ffffff;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --gradient-overlay: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
 }
 
 * {
@@ -254,9 +255,12 @@ header {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: var(--transition) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05); 
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.3s ease-out, 
+                border-color 0.3s ease-out !important;
 }
+
 .box-comunidade:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -402,6 +406,63 @@ body.dark-theme .text-info-in-inside {
     font-size: 1.5em;
     margin: auto;
     padding-top: 10px;
+}
+
+/*=================== SEÇÃO PARCEIROS =================*/
+:root {
+    --hero-height: 85vh;
+    --hero-padding: 0 20px;
+    --hero-margin-bottom: 25vh;
+    --gradient-overlay: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
+    --logo-size: 200px;
+    --logo-radius: 40px;
+}
+
+.hero-parceiro {
+    height: var(--hero-height);
+    background-size: cover;
+    background-position: center 100px;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: var(--hero-padding);
+    margin-bottom: 15vh;
+}
+
+.logo-parceiros {
+    width: var(--logo-size);
+    border-radius: var(--logo-radius);
+    box-shadow: var(--shadow);
+}
+
+.hero-parceiro[data-parceiro="cosseno"] {
+    background-image: var(--gradient-overlay), url('/fundo_parceiros/cosseno.png');
+}
+
+.hero-parceiro[data-parceiro="fenix"] {
+    background-image: var(--gradient-overlay), url('/fundo_parceiros/fênix.png');
+}
+
+.hero-parceiro[data-parceiro="japa"] {
+    background-image: var(--gradient-overlay), url('/fundo_parceiros/japa.png');
+}
+
+.hero-parceiro[data-parceiro="puppin"] {
+    background-image: var(--gradient-overlay), url('/fundo_parceiros/puppin.png');
+    background-position: center 25px;
+}
+
+.logo-japa {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.logo-fenix {
+    width: 250px;
+    box-shadow: none;
 }
 
 
