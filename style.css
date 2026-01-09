@@ -38,8 +38,10 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Evita o scroll lateral "fantasma" */
-  -webkit-font-smoothing: antialiased; /* Deixa a fonte mais bonita no iPhone */
+  overflow-x: hidden;
+  /* Evita o scroll lateral "fantasma" */
+  -webkit-font-smoothing: antialiased;
+  /* Deixa a fonte mais bonita no iPhone */
 }
 
 /* ================= HEADER (MODERNIZADO E ALINHADO) ================= */
@@ -144,12 +146,10 @@ header {
 }
 
 .line {
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--primary-color),
-    transparent
-  );
+  background: linear-gradient(to right,
+      transparent,
+      var(--primary-color),
+      transparent);
   width: 250px;
   height: 4px;
   margin: 0 auto 40px;
@@ -219,12 +219,10 @@ header {
 }
 
 .line {
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--primary-color),
-    transparent
-  );
+  background: linear-gradient(to right,
+      transparent,
+      var(--primary-color),
+      transparent);
   width: 250px;
   height: 4px;
   margin: 0 auto 40px;
@@ -346,22 +344,31 @@ body.dark-theme .text-info-in-inside {
 /* ================= NUMBERS (BLOCOS DE METRICS) ================= */
 .container-numbers {
   display: flex;
-  flex-wrap: wrap; /* Essencial: permite quebrar linha no celular */
-  justify-content: center; /* Centraliza horizontalmente os itens */
-  align-items: center; /* Centraliza verticalmente */
-  gap: 30px; /* Espaçamento entre os blocos */
+  flex-wrap: wrap;
+  /* Essencial: permite quebrar linha no celular */
+  justify-content: center;
+  /* Centraliza horizontalmente os itens */
+  align-items: center;
+  /* Centraliza verticalmente */
+  gap: 30px;
+  /* Espaçamento entre os blocos */
   width: 100%;
-  max-width: 1200px; /* Limita a largura em telas muito grandes */
-  margin: 0 auto; /* Centraliza o container inteiro na página */
+  max-width: 1200px;
+  /* Limita a largura em telas muito grandes */
+  margin: 0 auto;
+  /* Centraliza o container inteiro na página */
   padding: 20px;
 }
 
 .numbers {
-  flex: 1 1 200px; /* Tenta ocupar 200px, mas cresce se houver espaço */
-  max-width: 280px; /* Evita que o número fique "gigante" em telas médias */
+  flex: 1 1 200px;
+  /* Tenta ocupar 200px, mas cresce se houver espaço */
+  max-width: 280px;
+  /* Evita que o número fique "gigante" em telas médias */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza o texto e a label internamente */
+  align-items: center;
+  /* Centraliza o texto e a label internamente */
   text-align: center;
 }
 
@@ -438,7 +445,7 @@ body.dark-theme .text-info-in-inside {
   align-items: center;
   text-align: center;
   padding: var(--hero-padding);
-  margin-bottom: 15vh;
+  margin-bottom: 10vh;
 }
 
 .logo-parceiros {
@@ -456,7 +463,7 @@ body.dark-theme .text-info-in-inside {
 
 .hero-parceiro[data-parceiro="cosseno"] {
   background-image: var(--gradient-overlay), url("fundo_parceiros/cosseno.png");
-  background-position: center 80px;
+  background-position: center 0px;
 }
 
 .hero-parceiro[data-parceiro="fenix"] {
@@ -474,6 +481,12 @@ body.dark-theme .text-info-in-inside {
   background-position: center -25px;
 }
 
+.hero-parceiro[data-parceiro="mobius"] {
+  background-image: var(--gradient-overlay), url("fundo_parceiros/fundo-mobius.png");
+  background-position: center 90px;
+}
+
+
 .logo-japa {
   border-radius: 0;
   box-shadow: none;
@@ -485,6 +498,10 @@ body.dark-theme .text-info-in-inside {
 }
 
 .logo-cosseno {
+  width: 150px;
+}
+
+.logo-mobius {
   width: 150px;
 }
 
@@ -588,7 +605,7 @@ body.dark-theme .text-info-in-inside {
   box-shadow: 0 10px 50px #2e7d3231;
 }
 
-.navbar li + li {
+.navbar li+li {
   margin-top: 0.75rem;
 }
 
@@ -720,16 +737,18 @@ body.dark-theme .filter-btn.active {
   border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: center;
   padding-bottom: 20px;
-  width: 100%; /* Faz o card ocupar o espaço do slide */
+  width: 100%;
+  /* Faz o card ocupar o espaço do slide */
   max-width: 350px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   min-height: 450px;
+  transition: var(--transition) !important;
 }
 
 .card-professor:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) !important;
   border-color: var(--accent-color);
 }
 
@@ -746,9 +765,6 @@ body.dark-theme .filter-btn.active {
   transition: transform 0.5s ease;
 }
 
-.card-professor:hover .foto-professor img {
-  transform: scale(1.1);
-}
 
 .info-professor {
   padding: 20px;
@@ -801,7 +817,8 @@ body.dark-theme .card-professor {
 
 .swiper {
   width: 100%;
-  padding: 40px 50px !important; /* Espaço para a sombra do card não cortar */
+  padding: 40px 50px !important;
+  /* Espaço para a sombra do card não cortar */
 }
 
 /* No seu style.css, na parte dos professores */
@@ -809,7 +826,8 @@ body.dark-theme .card-professor {
   height: auto;
   display: flex;
   justify-content: center;
-  align-items: stretch; /* Garante que todos os cards tenham a mesma altura */
+  align-items: stretch;
+  /* Garante que todos os cards tenham a mesma altura */
 }
 
 /* Customizando as setas para o verde do Plantel */
@@ -1152,6 +1170,7 @@ footer,
 /* ================= RESPONSIVIDADE E BOTTOM NAV ================= */
 
 @media (max-width: 1024px) {
+
   /* Esconde a barra lateral antiga se ela existir */
   .navbar {
     display: none !important;
@@ -1159,6 +1178,7 @@ footer,
 }
 
 @media (max-width: 768px) {
+
   /* 1. Ajuste do Header: Apenas a Logo centralizada */
   header {
     justify-content: center;
@@ -1287,6 +1307,7 @@ footer,
 }
 
 @media (max-width: 768px) {
+
   /* Faz os cards surgirem um pouco mais devagar no mobile */
   .box-comunidade {
     opacity: 0;
@@ -1312,6 +1333,7 @@ footer,
 
 /* ================= AJUSTES MOBILE: espaçamentos e fontes ================= */
 @media (max-width: 768px) {
+
   /* Evita que o header fixo sobreponha o conteúdo */
   main {
     margin-top: 88px;
@@ -1560,15 +1582,18 @@ body.dark-theme .hamburger .bar:after {
 
 #sobre {
   width: 100%;
-  min-height: 100dvh; /* dvh = Dynamic Viewport Height (perfeito para iPhone) */
+  min-height: 100dvh;
+  /* dvh = Dynamic Viewport Height (perfeito para iPhone) */
   background-size: cover;
   background-position: center center;
-  background-attachment: scroll; /* Obrigatório para mobile */
+  background-attachment: scroll;
+  /* Obrigatório para mobile */
 }
 
 @media (min-width: 1024px) {
   #sobre {
-    background-attachment: fixed; /* Parallax só no PC */
+    background-attachment: fixed;
+    /* Parallax só no PC */
   }
 }
 
@@ -1663,6 +1688,7 @@ body.dark-theme .hamburger .bar:after {
 }
 
 @media (max-width: 1024px) {
+
   /* garante que o FAB apareça apenas em telas menores */
   .social-fab {
     display: flex;
@@ -1683,10 +1709,12 @@ body.dark-theme .hamburger .bar:after {
 }
 
 @media (max-width: 480px) {
+
   /* Títulos menores para não quebrar em telas mini (iPhone SE) */
   h1 {
     font-size: 2.2rem;
   }
+
   h2 {
     font-size: 1.8rem;
   }
