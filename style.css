@@ -445,23 +445,33 @@ body.dark-theme .text-info-in-inside {
   width: var(--logo-size);
   border-radius: var(--logo-radius);
   box-shadow: var(--shadow);
+  transition: var(--transition) !important;
+}
+
+.logo-parceiros:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .hero-parceiro[data-parceiro="cosseno"] {
   background-image: var(--gradient-overlay), url("fundo_parceiros/cosseno.png");
+  background-position: center 80px;
 }
 
 .hero-parceiro[data-parceiro="fenix"] {
   background-image: var(--gradient-overlay), url("fundo_parceiros/fênix.png");
+  background-position: center 100px;
 }
 
 .hero-parceiro[data-parceiro="japa"] {
   background-image: var(--gradient-overlay), url("fundo_parceiros/japa.png");
+  background-position: center 50px;
 }
 
 .hero-parceiro[data-parceiro="puppin"] {
   background-image: var(--gradient-overlay), url("fundo_parceiros/puppin.png");
-  background-position: center 25px;
+  background-position: center -25px;
 }
 
 .logo-japa {
@@ -472,6 +482,19 @@ body.dark-theme .text-info-in-inside {
 .logo-fenix {
   width: 250px;
   box-shadow: none;
+}
+
+.logo-cosseno {
+  width: 150px;
+}
+
+.hero-parceiro-text {
+  text-align: center;
+  margin: 10px;
+  font-size: 1.5em;
+  font-family: 'Pathway Gothic One', sans-serif;
+  text-shadow: var(--shadow);
+  color: white;
 }
 
 /* Responsividade para Celulares */
@@ -1030,7 +1053,7 @@ body.dark-theme .bottom-nav {
 }
 
 #dark-mode-toggle:hover {
-  transform: scale(1.1) rotate(15deg);
+  /*transform: scale(1.1) rotate(15deg);*/
   /* Leve inclinação ao passar o mouse */
   background: var(--primary-color);
   color: white;
