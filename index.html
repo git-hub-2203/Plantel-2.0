@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/LogoPlant.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -20,6 +21,7 @@
             <a href="#comunidades">Comunidades ɸ</a>
             <a href="#redes">Redes Sociais Ψ</a>
             <a href="#parceiros">Parceiros λ</a>
+            <a href="#professores">Professores ξ</a>
         </nav>
 
         <div class="dark-mode-container">
@@ -45,6 +47,7 @@
                 <a href="#comunidades" class="mobile-link">Comunidades</a>
                 <a href="#redes" class="mobile-link">Redes Sociais</a>
                 <a href="#parceiros" class="mobile-link">Parceiros</a>
+                <a href="#professores" class="mobile-link">Professores ξ</a>
             </div>
         </nav>
     </header>
@@ -373,6 +376,75 @@
             </li>
         </ul>
     </nav>
+    <section id="professores" class="secao">
+        <h2>Professores ξ</h2>
+        <div class="line"></div>
+
+        <div class="filtros-professores">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="exatas">Exatas</button>
+            <button class="filter-btn" data-filter="humanas">Humanas</button>
+        </div>
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide card-professor" data-category="exatas">
+                    <div class="foto-professor"><img src="images/prof1.jpg" alt=""></div>
+                    <div class="info-professor">
+                        <h3>Nome do Prof</h3>
+                        <span class="materia">Matemática</span>
+                        <p>Descrição curta aqui.</p>
+                    </div>
+                </div>
+                <div class="swiper-slide card-professor" data-category="humanas">
+                    <div class="foto-professor"><img src="images/prof2.jpg" alt=""></div>
+                    <div class="info-professor">
+                        <h3>Nome da Prof</h3>
+                        <span class="materia">História</span>
+                        <p>Descrição curta aqui.</p>
+                    </div>
+                </div>
+                <div class="swiper-slide card-professor" data-category="exatas">
+                    <div class="foto-professor"><img src="images/prof1.jpg" alt=""></div>
+                    <div class="info-professor">
+                        <h3>Nome do Prof</h3>
+                        <span class="materia">Matemática</span>
+                        <p>Descrição curta aqui.</p>
+                    </div>
+                </div>
+                <div class="swiper-slide card-professor" data-category="humanas">
+                    <div class="foto-professor"><img src="images/prof2.jpg" alt=""></div>
+                    <div class="info-professor">
+                        <h3>Nome da Prof</h3>
+                        <span class="materia">História</span>
+                        <p>Descrição curta aqui.</p>
+                    </div>
+                </div>
+                <div class="swiper-slide card-professor" data-category="exatas">
+                    <div class="foto-professor"><img src="images/prof1.jpg" alt=""></div>
+                    <div class="info-professor">
+                        <h3>Nome do Prof</h3>
+                        <span class="materia">Matemática</span>
+                        <p>Descrição curta aqui.</p>
+                    </div>
+                </div>
+                <div class="swiper-slide card-professor" data-category="humanas">
+                    <div class="foto-professor"><img src="images/prof2.jpg" alt=""></div>
+                    <div class="info-professor">
+                        <h3>Nome da Prof</h3>
+                        <span class="materia">História</span>
+                        <p>Descrição curta aqui.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="index.js"></script>
@@ -391,6 +463,7 @@
                 <a href="#comunidades">Comunidades</a>
                 <a href="#redes">Redes Sociais</a>
                 <a href="#parceiros">Parceiros</a>
+                <a href="#professores">Professores</a>
             </div>
 
             <div class="footer-contact">
