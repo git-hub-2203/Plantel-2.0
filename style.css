@@ -439,19 +439,19 @@ body.dark-theme .text-info-in-inside {
 }
 
 .hero-parceiro[data-parceiro="cosseno"] {
-    background-image: var(--gradient-overlay), url('/fundo_parceiros/cosseno.png');
+    background-image: var(--gradient-overlay), url('fundo_parceiros/cosseno.png');
 }
 
 .hero-parceiro[data-parceiro="fenix"] {
-    background-image: var(--gradient-overlay), url('/fundo_parceiros/fênix.png');
+    background-image: var(--gradient-overlay), url('fundo_parceiros/fênix.png');
 }
 
 .hero-parceiro[data-parceiro="japa"] {
-    background-image: var(--gradient-overlay), url('/fundo_parceiros/japa.png');
+    background-image: var(--gradient-overlay), url('fundo_parceiros/japa.png');
 }
 
 .hero-parceiro[data-parceiro="puppin"] {
-    background-image: var(--gradient-overlay), url('/fundo_parceiros/puppin.png');
+    background-image: var(--gradient-overlay), url('fundo_parceiros/puppin.png');
     background-position: center 25px;
 }
 
