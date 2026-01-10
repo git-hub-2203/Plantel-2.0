@@ -694,6 +694,31 @@ body.dark-theme .text-info-in-inside {
   color: white;
 }
 
+@media (max-width: 768px) {
+  .hero-parceiro[data-parceiro="cosseno"] {
+    background-image: var(--gradient-overlay), url('fundo_parceiros/cosseno-cel.png');
+    background-position: center 25px;
+  }
+
+  .hero-parceiro[data-parceiro="fenix"] {
+    background-image: var(--gradient-overlay), url('fundo_parceiros/fênix-cel.png');
+    background-position: center 50px;
+  }
+
+  .hero-parceiro[data-parceiro="japa"] {
+    background-image: var(--gradient-overlay), url('fundo_parceiros/japa-cel.png');
+  }
+
+  .hero-parceiro[data-parceiro="puppin"] {
+    background-image: var(--gradient-overlay), url('fundo_parceiros/puppin-cel.png');
+  }
+
+  .hero-parceiro[data-parceiro="mobius"] {
+    background-image: var(--gradient-overlay), url('fundo_parceiros/mobius-cel.png');
+    background-position: center 25px;;
+  }
+}
+
 /* Responsividade para Celulares */
 @media (max-width: 768px) {
   .container-numbers {
