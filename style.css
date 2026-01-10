@@ -737,13 +737,14 @@ body.dark-theme .filter-btn.active {
   border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: center;
   padding-bottom: 20px;
-  width: 100%;
+  width: 250px;
   /* Faz o card ocupar o espaço do slide */
   max-width: 350px;
-  margin: 0 auto;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  min-height: 450px;
+  max-height: 500px;
+  min-height: 500px;
   transition: var(--transition) !important;
 }
 
@@ -755,16 +756,18 @@ body.dark-theme .filter-btn.active {
 .foto-professor {
   width: 100%;
   height: 250px;
-  overflow: hidden;
 }
 
 .foto-professor img {
   width: 100%;
-  height: 100%;
+  height: 110%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  object-position: center -40px;
 }
 
+.foto-germano img {
+  object-position: center -5px;
+}
 
 .info-professor {
   padding: 20px;
@@ -772,9 +775,14 @@ body.dark-theme .filter-btn.active {
 
 .info-professor h3 {
   font-family: "Pathway Gothic One", sans-serif;
-  font-size: 1.8rem;
+  font-size: 2.5em;
   color: var(--primary-color);
-  margin-bottom: 5px;
+}
+
+.info-professor h2 {
+  font-family: "Pathway Gothic One", sans-serif;
+  font-size: 1.5rem;
+  color: var(--primary-color);
 }
 
 .info-professor .materia {
@@ -790,7 +798,6 @@ body.dark-theme .filter-btn.active {
   font-size: 1rem;
   color: var(--text-dark);
   line-height: 1.4;
-  margin-bottom: 20px;
 }
 
 .redes-professor {
