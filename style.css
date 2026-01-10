@@ -547,7 +547,7 @@ body.dark-theme .text-info-in-inside {
   border-radius: 15px;
   box-shadow: var(--shadow);
   text-align: left;
-  transition: var(--transition);
+  transition: var(--transition) !important;
   border-bottom: 3px solid var(--primary-color); /* Detalhe verde na base */
 }
 
