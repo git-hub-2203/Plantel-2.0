@@ -146,10 +146,12 @@ header {
 }
 
 .line {
-  background: linear-gradient(to right,
-      transparent,
-      var(--primary-color),
-      transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
   width: 250px;
   height: 4px;
   margin: 0 auto 40px;
@@ -219,10 +221,12 @@ header {
 }
 
 .line {
-  background: linear-gradient(to right,
-      transparent,
-      var(--primary-color),
-      transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
   width: 250px;
   height: 4px;
   margin: 0 auto 40px;
@@ -482,10 +486,10 @@ body.dark-theme .text-info-in-inside {
 }
 
 .hero-parceiro[data-parceiro="mobius"] {
-  background-image: var(--gradient-overlay), url("fundo_parceiros/fundo-mobius.png");
+  background-image: var(--gradient-overlay),
+    url("fundo_parceiros/fundo-mobius.png");
   background-position: center 90px;
 }
-
 
 .logo-japa {
   border-radius: 0;
@@ -509,7 +513,7 @@ body.dark-theme .text-info-in-inside {
   text-align: center;
   margin: 10px;
   font-size: 1.5em;
-  font-family: 'Pathway Gothic One', sans-serif;
+  font-family: "Pathway Gothic One", sans-serif;
   text-shadow: var(--shadow);
   color: white;
 }
@@ -605,7 +609,7 @@ body.dark-theme .text-info-in-inside {
   box-shadow: 0 10px 50px #2e7d3231;
 }
 
-.navbar li+li {
+.navbar li + li {
   margin-top: 0.75rem;
 }
 
@@ -678,41 +682,63 @@ body.dark-theme .text-info-in-inside {
   transform: scale(1.05);
 }
 
-/* --- FILTROS MODERNOS --- */
-.filtros-professores {
+/* --- FILTROS MODERNOS (Alinhamento em Linha Única) --- */
+.filters {
   display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 30px 0 50px;
+  flex-direction: row; /* Força um ao lado do outro */
+  justify-content: center; /* Centraliza o grupo na tela */
+  align-items: center;
+  gap: 8px; /* Espaço reduzido entre botões */
+  margin: 20px auto;
+  padding: 10px 5px;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .filter-btn {
-  padding: 10px 24px;
+  /* Ajuste de tamanho para caber tudo em uma linha */
+  padding: 8px 15px;
+  font-size: 0.85rem;
+
   border: 2px solid var(--primary-color);
   background: transparent;
   color: var(--primary-color);
   border-radius: 50px;
-  font-family: "Pathway Gothic One", sans-serif;
-  font-size: 1.2rem;
-  letter-spacing: 1px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  text-transform: uppercase;
+  font-weight: 600;
+  transition: var(--transition);
+  white-space: nowrap; /* Impede que o texto quebre linha */
+  flex: 0 1 auto; /* Permite que o botão encolha se a tela for mini */
 }
 
+/* Ajuste extremo para telas muito pequenas (ex: iPhone SE) */
+@media (max-width: 400px) {
+  .filters {
+    gap: 4px; /* Espaço mínimo entre botões */
+    padding: 10px 2px;
+  }
+
+  .filter-btn {
+    padding: 6px 10px; /* Botão mais "magro" */
+    font-size: 0.7rem; /* Letra pequena o suficiente para caber os 4 */
+    border-width: 1.5px;
+  }
+}
+
+/* Efeito Ativo e Hover */
 .filter-btn:hover,
 .filter-btn.active {
   background: var(--primary-color);
   color: white;
-  box-shadow: 0 8px 15px rgba(46, 125, 50, 0.3);
-  transform: translateY(-3px);
+  /* Removido o transform: translateY para garantir que nada seja cortado */
+  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
 }
 
+/* Tema Escuro */
 body.dark-theme .filter-btn {
   border-color: var(--accent-color);
   color: var(--accent-color);
 }
-
 body.dark-theme .filter-btn.active {
   background: var(--accent-color);
   color: #000;
@@ -914,7 +940,9 @@ body.dark-theme .card-professor {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 40px;
   max-width: 1200px;
-  margin: 0 auto 40px;
+  margin-left: auto; 
+  margin-right: 10%; 
+  padding-left: 5%; 
   text-align: left;
 }
 
@@ -1177,7 +1205,6 @@ footer,
 /* ================= RESPONSIVIDADE E BOTTOM NAV ================= */
 
 @media (max-width: 1024px) {
-
   /* Esconde a barra lateral antiga se ela existir */
   .navbar {
     display: none !important;
@@ -1185,7 +1212,6 @@ footer,
 }
 
 @media (max-width: 768px) {
-
   /* 1. Ajuste do Header: Apenas a Logo centralizada */
   header {
     justify-content: center;
@@ -1314,7 +1340,6 @@ footer,
 }
 
 @media (max-width: 768px) {
-
   /* Faz os cards surgirem um pouco mais devagar no mobile */
   .box-comunidade {
     opacity: 0;
@@ -1340,7 +1365,6 @@ footer,
 
 /* ================= AJUSTES MOBILE: espaçamentos e fontes ================= */
 @media (max-width: 768px) {
-
   /* Evita que o header fixo sobreponha o conteúdo */
   main {
     margin-top: 88px;
@@ -1695,7 +1719,6 @@ body.dark-theme .hamburger .bar:after {
 }
 
 @media (max-width: 1024px) {
-
   /* garante que o FAB apareça apenas em telas menores */
   .social-fab {
     display: flex;
@@ -1716,7 +1739,6 @@ body.dark-theme .hamburger .bar:after {
 }
 
 @media (max-width: 480px) {
-
   /* Títulos menores para não quebrar em telas mini (iPhone SE) */
   h1 {
     font-size: 2.2rem;
