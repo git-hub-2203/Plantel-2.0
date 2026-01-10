@@ -43,7 +43,6 @@
 
 /* 4. Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-
   .secao,
   .reveal {
     transition: none !important;
@@ -199,10 +198,12 @@ header {
 }
 
 .line {
-  background: linear-gradient(to right,
-      transparent,
-      var(--primary-color),
-      transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
   width: 250px;
   height: 4px;
   margin: 0 auto 40px;
@@ -247,10 +248,6 @@ header {
 .secao {
   padding: 100px 10% 80px;
   background: var(--white);
-  /* Classes para o JavaScript de animação */
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 /* Quando o JS detectar o scroll, adiciona esta classe */
@@ -272,10 +269,12 @@ header {
 }
 
 .line {
-  background: linear-gradient(to right,
-      transparent,
-      var(--primary-color),
-      transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
   width: 250px;
   height: 4px;
   margin: 0 auto 40px;
@@ -478,18 +477,10 @@ body.dark-theme .text-info-in-inside {
 }
 
 /* --- SEÇÃO COMO FUNCIONA (IDENTIDADE VERDE) --- */
-.how-it-works {
-  padding: 100px 20px;
-  background-color: var(--white);
-  /* Segue o padrão de seções claras do seu código */
-  text-align: center;
-}
-
 .section-divider {
   width: 60px;
   height: 4px;
-  background-color: var(--primary-color);
-  /* O verde do "Nosso Alcance" */
+  background-color: var(--primary-color); /* O verde do "Nosso Alcance" */
   margin: 15px auto 50px;
   border-radius: 2px;
 }
@@ -527,8 +518,7 @@ body.dark-theme .text-info-in-inside {
   transform: translateX(-50%);
   width: 60px;
   height: 60px;
-  background-color: var(--primary-color);
-  /* Verde Identidade */
+  background-color: var(--primary-color); /* Verde Identidade */
   color: white;
   border-radius: 50%;
   display: flex;
@@ -545,9 +535,8 @@ body.dark-theme .text-info-in-inside {
   border-radius: 15px;
   box-shadow: var(--shadow);
   text-align: left;
-  transition: var(--transition) !important;
-  border-bottom: 3px solid var(--primary-color);
-  /* Detalhe verde na base */
+  transition: var(--transition);
+  border-bottom: 3px solid var(--primary-color); /* Detalhe verde na base */
 }
 
 .timeline-content:hover {
@@ -570,7 +559,6 @@ body.dark-theme .text-info-in-inside {
 .side-left {
   justify-content: flex-start;
 }
-
 .side-right {
   justify-content: flex-end;
 }
@@ -581,28 +569,19 @@ body.dark-theme .text-info-in-inside {
     left: 30px;
     transform: none;
   }
-
   .timeline-icon {
     left: 30px;
     transform: translateX(-50%);
   }
-
   .timeline-item {
     justify-content: flex-start;
     padding-left: 70px;
   }
-
   .timeline-content {
     width: 100%;
   }
 }
 
-/* REVEAL ANIMATION */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease-out;
-}
 
 /*=================== SEÇÃO PARCEIROS =================*/
 :root {
@@ -692,31 +671,6 @@ body.dark-theme .text-info-in-inside {
   font-family: "Pathway Gothic One", sans-serif;
   text-shadow: var(--shadow);
   color: white;
-}
-
-@media (max-width: 768px) {
-  .hero-parceiro[data-parceiro="cosseno"] {
-    background-image: var(--gradient-overlay), url('fundo_parceiros/cosseno-cel.png');
-    background-position: center 25px;
-  }
-
-  .hero-parceiro[data-parceiro="fenix"] {
-    background-image: var(--gradient-overlay), url('fundo_parceiros/fênix-cel.png');
-    background-position: center 50px;
-  }
-
-  .hero-parceiro[data-parceiro="japa"] {
-    background-image: var(--gradient-overlay), url('fundo_parceiros/japa-cel.png');
-  }
-
-  .hero-parceiro[data-parceiro="puppin"] {
-    background-image: var(--gradient-overlay), url('fundo_parceiros/puppin-cel.png');
-  }
-
-  .hero-parceiro[data-parceiro="mobius"] {
-    background-image: var(--gradient-overlay), url('fundo_parceiros/mobius-cel.png');
-    background-position: center 25px;;
-  }
 }
 
 /* Responsividade para Celulares */
@@ -810,7 +764,7 @@ body.dark-theme .text-info-in-inside {
   box-shadow: 0 10px 50px #2e7d3231;
 }
 
-.navbar li+li {
+.navbar li + li {
   margin-top: 0.75rem;
 }
 
@@ -902,12 +856,7 @@ body.dark-theme .text-info-in-inside {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--shadow);
-  transition: var(--transition) !important;
-}
-
-.faq-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
 }
 
 .faq-question {
@@ -948,10 +897,8 @@ body.dark-theme .text-info-in-inside {
 
 .faq-answer p {
   padding: 0 25px 20px 25px;
-  color: #414141;
+  color: #666;
   line-height: 1.6;
-  font-size: 1.2em;
-  margin-top: 2%;
 }
 
 /* Estado Aberto */
@@ -982,13 +929,10 @@ body.dark-theme .text-info-in-inside {
 /* --- FILTROS MODERNOS (Alinhamento em Linha Única) --- */
 .filters {
   display: flex;
-  flex-direction: row;
-  /* Força um ao lado do outro */
-  justify-content: center;
-  /* Centraliza o grupo na tela */
+  flex-direction: row; /* Força um ao lado do outro */
+  justify-content: center; /* Centraliza o grupo na tela */
   align-items: center;
-  gap: 8px;
-  /* Espaço reduzido entre botões */
+  gap: 8px; /* Espaço reduzido entre botões */
   margin: 20px auto;
   padding: 10px 5px;
   width: 100%;
@@ -1007,25 +951,20 @@ body.dark-theme .text-info-in-inside {
   cursor: pointer;
   font-weight: 600;
   transition: var(--transition);
-  white-space: nowrap;
-  /* Impede que o texto quebre linha */
-  flex: 0 1 auto;
-  /* Permite que o botão encolha se a tela for mini */
+  white-space: nowrap; /* Impede que o texto quebre linha */
+  flex: 0 1 auto; /* Permite que o botão encolha se a tela for mini */
 }
 
 /* Ajuste extremo para telas muito pequenas (ex: iPhone SE) */
 @media (max-width: 400px) {
   .filters {
-    gap: 4px;
-    /* Espaço mínimo entre botões */
+    gap: 4px; /* Espaço mínimo entre botões */
     padding: 10px 2px;
   }
 
   .filter-btn {
-    padding: 6px 10px;
-    /* Botão mais "magro" */
-    font-size: 0.7rem;
-    /* Letra pequena o suficiente para caber os 4 */
+    padding: 6px 10px; /* Botão mais "magro" */
+    font-size: 0.7rem; /* Letra pequena o suficiente para caber os 4 */
     border-width: 1.5px;
   }
 }
@@ -1044,7 +983,6 @@ body.dark-theme .filter-btn {
   border-color: var(--accent-color);
   color: var(--accent-color);
 }
-
 body.dark-theme .filter-btn.active {
   background: var(--accent-color);
   color: #000;
@@ -1511,7 +1449,6 @@ footer,
 /* ================= RESPONSIVIDADE E BOTTOM NAV ================= */
 
 @media (max-width: 1024px) {
-
   /* Esconde a barra lateral antiga se ela existir */
   .navbar {
     display: none !important;
@@ -1519,7 +1456,6 @@ footer,
 }
 
 @media (max-width: 768px) {
-
   /* 1. Ajuste do Header: Apenas a Logo centralizada */
   header {
     justify-content: center;
@@ -1648,19 +1584,17 @@ footer,
 }
 
 @media (max-width: 768px) {
-
-  /* Faz os cards surgirem um pouco mais devagar no mobile */
-  .box-comunidade {
+  .js-enabled .box-comunidade {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.6s ease-out;
   }
 
-  /* Quando a seção pai ficar visível, os cards aparecem */
-  .secao.visible .box-comunidade {
+  .js-enabled .secao.visible .box-comunidade {
     opacity: 1;
     transform: translateY(0);
   }
+
 
   /* Delay para o segundo e terceiro card (efeito cascata) */
   .box-comunidade:nth-child(2) {
@@ -1674,7 +1608,6 @@ footer,
 
 /* ================= AJUSTES MOBILE: espaçamentos e fontes ================= */
 @media (max-width: 768px) {
-
   /* Evita que o header fixo sobreponha o conteúdo */
   main {
     margin-top: 88px;
@@ -2029,7 +1962,6 @@ body.dark-theme .hamburger .bar:after {
 }
 
 @media (max-width: 1024px) {
-
   /* garante que o FAB apareça apenas em telas menores */
   .social-fab {
     display: flex;
@@ -2050,7 +1982,6 @@ body.dark-theme .hamburger .bar:after {
 }
 
 @media (max-width: 480px) {
-
   /* Títulos menores para não quebrar em telas mini (iPhone SE) */
   h1 {
     font-size: 2.2rem;
@@ -2091,4 +2022,83 @@ header {
   padding-top: max(12px, env(safe-area-inset-top));
   padding-left: max(5%, env(safe-area-inset-left));
   padding-right: max(5%, env(safe-area-inset-right));
+}
+
+/* ======================================================
+   FORÇAR LAYOUT MOBILE EM LANDSCAPE (CELULARES)
+====================================================== */
+@media (max-width: 1024px) and (orientation: landscape) {
+  /* Mantém comportamento de mobile */
+  header {
+    justify-content: center;
+    padding: 10px 16px;
+  }
+
+  header .menu,
+  header #link {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+  .bottom-nav {
+    display: flex !important;
+  }
+
+  .navbar {
+    display: none !important;
+  }
+
+  /* Evita layouts "esticados" */
+  .secao {
+    padding: 60px 20px 100px;
+  }
+
+  /* Hero não pode ocupar 100vh no landscape */
+  .hero,
+  .hero-parceiro {
+    min-height: 100dvh;
+    height: auto;
+    background-attachment: scroll !important;
+  }
+
+  /* Cards continuam em coluna */
+  .container-comunidades,
+  .container-redes,
+  .container-professores {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Evita fontes gigantes */
+  .title h1 {
+    font-size: 2.2rem;
+  }
+
+  .frase-kant {
+    font-size: 1.1rem;
+  }
+
+  /* Corrige FAB e botão voltar ao topo */
+  .social-fab {
+    bottom: 100px;
+  }
+
+  #backToTop {
+    bottom: 85px;
+  }
+}
+
+@media (orientation: landscape) {
+  .hero {
+    min-height: 100dvh;
+    height: auto;
+  }
+}
+
+@media (max-width: 1024px) and (orientation: landscape) {
+  * {
+    background-attachment: scroll !important;
+  }
 }
