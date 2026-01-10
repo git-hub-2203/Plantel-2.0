@@ -1,3 +1,55 @@
+/* ======================================================
+   SAFETY & FALLBACK LAYER (AUTO-GENERATED)
+   - Prevents invisible content if JS fails
+   - Reduces repaint/reflow cost
+   - Keeps animations progressive-enhancement only
+====================================================== */
+
+/* 1. NEVER hide content by default */
+.secao,
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* 2. Animate only when JS adds classes */
+.js-enabled .secao {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js-enabled .secao.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js-enabled .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js-enabled .reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3. Reduce repaint cost */
+.secao,
+.reveal {
+  will-change: opacity, transform;
+}
+
+/* 4. Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .secao,
+  .reveal {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
 /* ================= VARIÁVEIS E CONFIGURAÇÕES GERAIS ================= */
 :root {
   --primary-color: #2e7d32;
@@ -428,6 +480,127 @@ body.dark-theme .text-info-in-inside {
   padding-top: 10px;
 }
 
+/* --- SEÇÃO COMO FUNCIONA (IDENTIDADE VERDE) --- */
+.how-it-works {
+  padding: 100px 20px;
+  background-color: var(
+    --white
+  ); /* Segue o padrão de seções claras do seu código */
+  text-align: center;
+}
+
+.section-divider {
+  width: 60px;
+  height: 4px;
+  background-color: var(--primary-color); /* O verde do "Nosso Alcance" */
+  margin: 15px auto 50px;
+  border-radius: 2px;
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* A LINHA - Fica no fundo (z-index: 1) */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #e0e0e0;
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  width: 100%;
+  margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+}
+
+/* O ÍCONE - Fica na frente (z-index: 10) */
+.timeline-icon {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background-color: var(--primary-color); /* Verde Identidade */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content {
+  width: 42%;
+  background: var(--bg-light);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  text-align: left;
+  transition: var(--transition);
+  border-bottom: 3px solid var(--primary-color); /* Detalhe verde na base */
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+}
+
+.step-label {
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.timeline-content h3 {
+  margin: 5px 0 10px;
+  color: var(--text-dark);
+}
+
+/* Posicionamento Esquerda/Direita */
+.side-left {
+  justify-content: flex-start;
+}
+.side-right {
+  justify-content: flex-end;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 30px;
+    transform: none;
+  }
+  .timeline-icon {
+    left: 30px;
+    transform: translateX(-50%);
+  }
+  .timeline-item {
+    justify-content: flex-start;
+    padding-left: 70px;
+  }
+  .timeline-content {
+    width: 100%;
+  }
+}
+
+/* REVEAL ANIMATION */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
 /*=================== SEÇÃO PARCEIROS =================*/
 :root {
   --hero-height: 85vh;
@@ -680,6 +853,95 @@ body.dark-theme .text-info-in-inside {
 .navbar #redes ul li a:hover {
   opacity: 0.8;
   transform: scale(1.05);
+}
+
+/* --- FAQ SECTION --- */
+.faq-section {
+  padding: 100px 20px;
+  background-color: var(--bg-light);
+}
+
+.faq-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.faq-item {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-align: left;
+  transition: var(--transition);
+}
+
+.faq-question i {
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  /* Transição suave de tempo e movimento */
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.faq-item.active .faq-answer {
+  /* Use um valor alto o suficiente para qualquer texto (ex: 500px) */
+  max-height: 500px;
+  padding-bottom: 20px;
+}
+
+.faq-answer p {
+  padding: 0 25px 20px 25px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Estado Aberto */
+.faq-item.active .faq-question {
+  color: var(--primary-color);
+}
+
+/* Garante que o ícone gire para indicar que está aberto */
+.faq-item.active .faq-question i {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+/* Adicione isto na sua seção de Dark Mode no style.css */
+.dark-theme .faq-item {
+  background: #1e1e1e;
+  color: var(--text-light);
+}
+
+.dark-theme .faq-answer {
+  background-color: #252525;
+}
+
+.dark-theme .faq-question {
+  color: var(--text-light);
 }
 
 /* --- FILTROS MODERNOS (Alinhamento em Linha Única) --- */
@@ -940,9 +1202,9 @@ body.dark-theme .card-professor {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 40px;
   max-width: 1200px;
-  margin-left: auto; 
-  margin-right: 10%; 
-  padding-left: 5%; 
+  margin-left: auto;
+  margin-right: 10%;
+  padding-left: 5%;
   text-align: left;
 }
 
