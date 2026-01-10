@@ -2021,7 +2021,7 @@ body.dark-theme .hamburger .bar:after {
 ====================================================== */
 @media (max-width: 1024px) and (orientation: landscape) {
   .social-fab {
-    bottom: max(40px, env(safe-area-inset-bottom));
+    bottom: 40px;
 
     right: 14px; /* leve ajuste lateral opcional */
   }
