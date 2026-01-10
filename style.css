@@ -582,7 +582,6 @@ body.dark-theme .text-info-in-inside {
   }
 }
 
-
 /*=================== SEÇÃO PARCEIROS =================*/
 :root {
   --hero-height: 85vh;
@@ -1595,7 +1594,6 @@ footer,
     transform: translateY(0);
   }
 
-
   /* Delay para o segundo e terceiro card (efeito cascata) */
   .box-comunidade:nth-child(2) {
     transition-delay: 0.2s;
@@ -2015,6 +2013,17 @@ body.dark-theme .hamburger .bar:after {
   /* Padding nas laterais de todas as seções para o texto não colar no vidro */
   .secao {
     padding: 40px 20px;
+  }
+}
+
+/* ======================================================
+   AJUSTE SOCIAL FAB — MOBILE LANDSCAPE
+====================================================== */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .social-fab {
+    bottom: max(40px, env(safe-area-inset-bottom));
+
+    right: 14px; /* leve ajuste lateral opcional */
   }
 }
 
