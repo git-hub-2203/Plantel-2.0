@@ -1346,6 +1346,7 @@ body.dark-theme .bottom-nav {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   /* Animação elástica */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  right:15px
 }
 
 #dark-mode-toggle:hover {
@@ -2013,101 +2014,5 @@ body.dark-theme .hamburger .bar:after {
   /* Padding nas laterais de todas as seções para o texto não colar no vidro */
   .secao {
     padding: 40px 20px;
-  }
-}
-
-/* ======================================================
-   AJUSTE SOCIAL FAB — MOBILE LANDSCAPE
-====================================================== */
-@media (max-width: 1024px) and (orientation: landscape) {
-  .social-fab {
-    bottom: 40px;
-
-    right: 14px; /* leve ajuste lateral opcional */
-  }
-}
-
-header {
-  padding-top: max(12px, env(safe-area-inset-top));
-  padding-left: max(5%, env(safe-area-inset-left));
-  padding-right: max(5%, env(safe-area-inset-right));
-}
-
-/* ======================================================
-   FORÇAR LAYOUT MOBILE EM LANDSCAPE (CELULARES)
-====================================================== */
-@media (max-width: 1024px) and (orientation: landscape) {
-  /* Mantém comportamento de mobile */
-  header {
-    justify-content: center;
-    padding: 10px 16px;
-  }
-
-  header .menu,
-  header #link {
-    display: none !important;
-  }
-
-  .hamburger {
-    display: flex !important;
-  }
-
-  .bottom-nav {
-    display: flex !important;
-  }
-
-  .navbar {
-    display: none !important;
-  }
-
-  /* Evita layouts "esticados" */
-  .secao {
-    padding: 60px 20px 100px;
-  }
-
-  /* Hero não pode ocupar 100vh no landscape */
-  .hero,
-  .hero-parceiro {
-    min-height: 100dvh;
-    height: auto;
-    background-attachment: scroll !important;
-  }
-
-  /* Cards continuam em coluna */
-  .container-comunidades,
-  .container-redes,
-  .container-professores {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Evita fontes gigantes */
-  .title h1 {
-    font-size: 2.2rem;
-  }
-
-  .frase-kant {
-    font-size: 1.1rem;
-  }
-
-  /* Corrige FAB e botão voltar ao topo */
-  .social-fab {
-    bottom: 100px;
-  }
-
-  #backToTop {
-    bottom: 85px;
-  }
-}
-
-@media (orientation: landscape) {
-  .hero {
-    min-height: 100dvh;
-    height: auto;
-  }
-}
-
-@media (max-width: 1024px) and (orientation: landscape) {
-  * {
-    background-attachment: scroll !important;
   }
 }
