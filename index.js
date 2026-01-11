@@ -1,5 +1,10 @@
 document.documentElement.classList.add("js-enabled");
 document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof lucide !== "undefined") {
+      lucide.createIcons(); // Isso transforma o <i data-lucide="..."> no ícone real
+    }
+  });
   /* ======================================================
      1. ICONS (LUCIDE)
   ====================================================== */
@@ -7,22 +12,36 @@ document.addEventListener("DOMContentLoaded", () => {
     lucide.createIcons();
   }
 
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card, index) => {
+    // Isso faz o primeiro card aparecer, 100ms depois o segundo, etc.
+    card.style.transitionDelay = `${index * 0.15}s`;
+  });
+
   /* ======================================================
      2. SECTION REVEAL (.secao)  **CRÍTICO**
   ====================================================== */
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
+  document.addEventListener("DOMContentLoaded", () => {
+    // 1. Criamos o observador
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.2, // Só ativa quando 20% do elemento já "entrou" na tela
+        rootMargin: "0px 0px -80px 0px", // Dá uma folga de 80px da borda de baixo
+      }
+    );
 
-  document.querySelectorAll(".secao").forEach((secao) => {
-    sectionObserver.observe(secao);
+    // 2. Aplicamos o observador em todos os elementos com a classe .reveal
+    document.querySelectorAll(".reveal").forEach((elemento) => {
+      observer.observe(elemento);
+    });
   });
 
   /* ======================================================
