@@ -5,69 +5,6 @@
    - Keeps animations progressive-enhancement only
 ====================================================== */
 
-/* 1. NEVER hide content by default */
-.secao,
-.reveal {
-  opacity: 1;
-  transform: none;
-}
-
-/* Estado inicial: Invisível e bem abaixo */
-.reveal {
-  opacity: 0;
-  transform: translateY(
-    60px
-  ); /* Aumentamos a distância para o deslize ser mais perceptível */
-  transition: opacity 1.2s ease-out,
-    transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); /* Curva de suavidade premium */
-  will-change: opacity, transform;
-}
-
-/* Estado final: Visível e na posição original */
-.reveal.active,
-.reveal.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 2. Animate only when JS adds classes */
-.js-enabled .secao {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.js-enabled .secao.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.js-enabled .reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.js-enabled .reveal.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 3. Reduce repaint cost */
-.secao,
-.reveal {
-  will-change: opacity, transform;
-}
-
-/* 4. Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .secao,
-  .reveal {
-    transition: none !important;
-    transform: none !important;
-  }
-}
-
 /* ================= VARIÁVEIS E CONFIGURAÇÕES GERAIS ================= */
 :root {
   --primary-color: #2e7d32;
@@ -380,32 +317,45 @@ header {
 
 /* ================= CARDS DE COMUNIDADES ================= */
 /* Container que segura os cards */
+/* Container que segura todos os cards */
 .container-comunidades {
-  display: grid;
-  /* Isso cria colunas automáticas de no mínimo 300px */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  display: flex;
+  flex-wrap: wrap; /* PERMITE QUE OS CARDS DESÇAM PARA A PRÓXIMA LINHA */
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
   width: 100%;
-  max-width: 1200px;
-  /* limita largura para centralizar visualmente */
-  margin: 0 auto;
-  padding: 20px 0;
-  align-items: stretch;
-  /* força colunas com mesma altura */
-  min-height: 320px;
+  opacity: 1 !important; /* GARANTE VISIBILIDADE */
+  visibility: visible !important;
 }
 
-/* O Card em si */
+/* O Card Individual */
 .box-comunidade {
-  background: var(--white);
-  border-radius: 20px;
+  flex: 1 1 300px; /* Tenta ter 300px, se não couber, desce */
+  max-width: 380px; /* Largura máxima para não ficar gigante no PC */
+  min-height: 250px; /* Garante uma altura mínima */
+  background-color: var(--white);
+  border-radius: 15px;
+  padding: 25px;
   box-shadow: var(--shadow);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.3s ease-out, border-color 0.3s ease-out !important;
+  opacity: 1 !important; /* Força a aparição já que tiramos o reveal */
+  transform: none !important;
+}
+
+/* Ajuste para Telemóveis (Responsividade) */
+@media (max-width: 480px) {
+  .container-comunidades {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .box-comunidade {
+    flex: 1 1 100%; /* No telemóvel, ocupa a largura toda */
+    max-width: 100%;
+    margin: 0;
+  }
 }
 
 .box-comunidade:hover {
@@ -1853,31 +1803,6 @@ footer,
   }
 }
 
-/* ================= RESPONSIVIDADE ADICIONAL (do bloco recebido) ================= */
-@media (max-width: 992px) {
-  header {
-    padding: 12px 3%;
-  }
-
-  .menu {
-    gap: 15px;
-  }
-
-  .menu a {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .title h1 {
-    font-size: 2.5rem;
-  }
-
-  .frase-kant {
-    font-size: 1.1rem;
-  }
-}
-
 /* ================= MOBILE MENU (HAMBURGUER + SLIDE DOWN) ================= */
 .hamburger {
   position: absolute;
@@ -2145,41 +2070,4 @@ body.dark-theme .hamburger .bar:after {
 .menu-open .bottom-nav,
 .menu-open #link {
   display: none !important;
-}
-
-@media (max-width: 480px) {
-  /* Títulos menores para não quebrar em telas mini (iPhone SE) */
-  h1 {
-    font-size: 2.2rem;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  /* Aumenta a área de toque dos botões (Requisito Google/Apple) */
-  .mobile-link,
-  #dark-mode-toggle,
-  #hamburger {
-    min-height: 44px;
-    min-width: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Garante que o Header não ocupe metade da tela */
-  header {
-    padding: 8px 15px;
-    height: 60px;
-  }
-
-  .logo {
-    height: 35px;
-  }
-
-  /* Padding nas laterais de todas as seções para o texto não colar no vidro */
-  .secao {
-    padding: 40px 20px;
-  }
 }

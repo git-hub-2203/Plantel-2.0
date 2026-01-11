@@ -21,50 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ======================================================
      2. SECTION REVEAL (.secao)  **CRÍTICO**
   ====================================================== */
-  document.addEventListener("DOMContentLoaded", () => {
-    // 1. Criamos o observador
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("reveal-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.2, // Só ativa quando 20% do elemento já "entrou" na tela
-        rootMargin: "0px 0px -80px 0px", // Dá uma folga de 80px da borda de baixo
-      }
-    );
-
-    // 2. Aplicamos o observador em todos os elementos com a classe .reveal
-    document.querySelectorAll(".reveal").forEach((elemento) => {
-      observer.observe(elemento);
-    });
-  });
-
-  /* ======================================================
-     3. ELEMENT REVEAL (.reveal)
-  ====================================================== */
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("reveal-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.15,
-      rootMargin: "0px 0px -50px 0px",
-    }
-  );
-
-  document.querySelectorAll(".reveal").forEach((el) => {
-    revealObserver.observe(el);
-  });
 
   /* ======================================================
      4. FAQ ACCORDION
@@ -293,4 +249,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+});
+
+// No seu index.js, procure por isto:
+document.querySelectorAll(".reveal, .secao").forEach((elemento) => {
+  revealObserver.observe(elemento); // Garanta que o nome aqui é o mesmo da variável lá em cima
 });
