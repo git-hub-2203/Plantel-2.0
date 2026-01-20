@@ -798,10 +798,9 @@ body.dark-theme .text-info-in-inside {
   /* Borda sutil para ajudar no efeito de vidro */
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 10px 50px #2e7d3231;
-  margin-top: -100px;
 }
 
-.navbar li + li {
+.navbar li+li {
   margin-top: 0.75rem;
 }
 
