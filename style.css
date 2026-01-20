@@ -2055,33 +2055,12 @@ body.dark-theme .hamburger .bar:after {
   /* garante que o FAB apareça apenas em telas menores */
   .social-fab {
     display: flex;
-  
-     header {
-    padding: 12px 3%;
-  }
-
-  .menu {
-    gap: 15px;
-  }
-
-  .menu a {
-    font-size: 1.1rem;
   }
 }
 
 @media (min-width: 1025px) {
   .social-fab {
     display: none;
-  header {
-    padding: 12px 3%;
-  }
-
-  .menu {
-    gap: 15px;
-  }
-
-  .menu a {
-    font-size: 1.1rem;
   }
 }
 
