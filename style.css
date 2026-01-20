@@ -2071,3 +2071,17 @@ body.dark-theme .hamburger .bar:after {
 .menu-open #link {
   display: none !important;
 }
+
+@media (max-width: 992px) {
+  header {
+    padding: 12px 3%;
+  }
+
+  .menu {
+    gap: 15px;
+  }
+
+  .menu a {
+    font-size: 1.1rem;
+  }
+}
