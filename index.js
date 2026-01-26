@@ -1,50 +1,25 @@
+// Adiciona classe para habilitar funcionalidades JS
 document.documentElement.classList.add("js-enabled");
-document.addEventListener("DOMContentLoaded", () => {
-  document.addEventListener("DOMContentLoaded", () => {
-    if (typeof lucide !== "undefined") {
-      lucide.createIcons(); // Isso transforma o <i data-lucide="..."> no ícone real
-    }
-  });
-  /* ======================================================
-     1. ICONS (LUCIDE)
-  ====================================================== */
+
+// ======================================================
+// VARIÁVEIS GLOBAIS
+// ======================================================
+let swiper;
+
+// ======================================================
+// FUNÇÕES GLOBAIS
+// ======================================================
+const initLucideIcons = () => {
   if (typeof lucide !== "undefined" && lucide.createIcons) {
     lucide.createIcons();
   }
+};
 
-  const cards = document.querySelectorAll(".card");
-  cards.forEach((card, index) => {
-    // Isso faz o primeiro card aparecer, 100ms depois o segundo, etc.
-    card.style.transitionDelay = `${index * 0.15}s`;
-  });
-
-  /* ======================================================
-     2. SECTION REVEAL (.secao)  **CRÍTICO**
-  ====================================================== */
-
-  /* ======================================================
-     4. FAQ ACCORDION
-  ====================================================== */
-  const faqItems = document.querySelectorAll(".faq-item");
-
-  faqItems.forEach((item) => {
-    const question = item.querySelector(".faq-question");
-    if (!question) return;
-
-    question.addEventListener("click", () => {
-      const isActive = item.classList.contains("active");
-      faqItems.forEach((i) => i.classList.remove("active"));
-      if (!isActive) item.classList.add("active");
-    });
-  });
-
-  /* ======================================================
-     5. SWIPER + FILTROS
-  ====================================================== */
-  const filterButtons = document.querySelectorAll(".filter-btn");
-
-  let swiper;
+const initSwiper = () => {
   if (typeof Swiper !== "undefined") {
+    const swiperContainer = document.querySelector(".mySwiper");
+    if (!swiperContainer) return;
+
     swiper = new Swiper(".mySwiper", {
       slidesPerView: 1,
       spaceBetween: 20,
@@ -63,39 +38,78 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     });
   }
+};
 
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      filterButtons.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
+// ======================================================
+// DOM CONTENT LOADED
+// ======================================================
+document.addEventListener("DOMContentLoaded", () => {
+  /* ======================================================
+     1. INICIALIZAÇÃO DOS ÍCONES (LUCIDE)
+  ====================================================== */
+  initLucideIcons();
 
-      const filterValue = button.getAttribute("data-filter");
+  /* ======================================================
+     2. FAQ ACCORDION
+  ====================================================== */
+  const faqItems = document.querySelectorAll(".faq-item");
+  faqItems.forEach((item) => {
+    const question = item.querySelector(".faq-question");
+    if (!question) return;
 
-      document.querySelectorAll(".swiper-slide").forEach((slide) => {
-        const category = slide.getAttribute("data-category");
-        slide.style.display =
-          filterValue === "all" || category === filterValue ? "flex" : "none";
-      });
-
-      if (swiper) {
-        swiper.update();
-        swiper.slideTo(0);
-      }
+    question.addEventListener("click", () => {
+      const isActive = item.classList.contains("active");
+      faqItems.forEach((i) => i.classList.remove("active"));
+      if (!isActive) item.classList.add("active");
     });
   });
 
   /* ======================================================
-     6. DARK MODE
+     3. SWIPER + FILTROS
+  ====================================================== */
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  if (filterButtons.length > 0) {
+    initSwiper();
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        const filterValue = button.getAttribute("data-filter");
+
+        document.querySelectorAll(".swiper-slide").forEach((slide) => {
+          const category = slide.getAttribute("data-category");
+          slide.style.display =
+            filterValue === "all" || category === filterValue ? "flex" : "none";
+        });
+
+        if (swiper) {
+          setTimeout(() => {
+            swiper.update();
+            swiper.slideTo(0);
+          }, 50);
+        }
+      });
+    });
+  }
+
+  /* ======================================================
+     4. DARK MODE
   ====================================================== */
   const darkModeToggle = document.getElementById("dark-mode-toggle");
   const body = document.body;
 
   if (darkModeToggle) {
-    if (localStorage.getItem("theme") === "dark") {
-      body.classList.add("dark-theme");
-      darkModeToggle.innerHTML = '<i data-lucide="sun"></i>';
-      lucide.createIcons();
-    }
+    const applyDarkMode = () => {
+      if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-theme");
+        darkModeToggle.innerHTML = '<i data-lucide="sun"></i>';
+        initLucideIcons();
+      }
+    };
+
+    applyDarkMode();
 
     darkModeToggle.addEventListener("click", () => {
       body.classList.toggle("dark-theme");
@@ -106,12 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
         : '<i data-lucide="moon"></i>';
 
       localStorage.setItem("theme", isDark ? "dark" : "light");
-      lucide.createIcons();
+      initLucideIcons();
     });
   }
 
   /* ======================================================
-     7. MENU MOBILE
+     5. MENU MOBILE
   ====================================================== */
   const hamburger = document.getElementById("hamburger");
   const mobileMenu = document.getElementById("mobile-menu");
@@ -124,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("menu-open");
     if (hamburger) {
       hamburger.innerHTML = '<i data-lucide="menu"></i>';
-      lucide.createIcons();
+      initLucideIcons();
     }
   };
 
@@ -136,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
       hamburger.innerHTML = isOpen
         ? '<i data-lucide="x"></i>'
         : '<i data-lucide="menu"></i>';
-      lucide.createIcons();
+      initLucideIcons();
     });
   }
 
@@ -147,9 +161,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ======================================================
-     8. SMOOTH SCROLL
+     6. SCROLL SUAVE
   ====================================================== */
-  document.querySelectorAll(".menu a, .mobile-link").forEach((link) => {
+  const smoothScrollLinks = document.querySelectorAll(
+    ".menu a, .mobile-link, .btn-saiba-mais, .bottom-nav a"
+  );
+  smoothScrollLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       const target = link.getAttribute("href");
       if (!target || !target.startsWith("#")) return;
@@ -158,78 +175,143 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!section) return;
 
       e.preventDefault();
+      const headerHeight = document.querySelector("header")?.offsetHeight || 80;
       window.scrollTo({
-        top: section.offsetTop - 80,
+        top: section.offsetTop - headerHeight,
         behavior: "smooth",
       });
+
+      // Fecha menu mobile se estiver aberto
+      if (mobileMenu && mobileMenu.classList.contains("open")) {
+        closeMobile();
+      }
     });
   });
 
   /* ======================================================
-     9. CONTADORES
+     7. CONTADORES ANIMADOS (COM EFEITO VISUAL) - CORRIGIDO
   ====================================================== */
-  const startCounting = () => {
-    document.querySelectorAll(".count-up").forEach((counter) => {
-      const target = +counter.dataset.target;
-      let current = 0;
-      const increment = target / 80;
+  const animateCounters = () => {
+    const counters = document.querySelectorAll(".numbers-text");
+    const duration = 2000; // 2 segundos
 
-      const update = () => {
-        current += increment;
-        if (current < target) {
-          let display = Math.ceil(current);
-          counter.innerText =
-            display >= 1000 ? (display / 1000).toFixed(1) + "k" : display;
+    counters.forEach((counter) => {
+      const targetText =
+        counter.getAttribute("data-target") || counter.textContent;
+      const target = parseInt(targetText.replace(/[^\d]/g, ""));
+      const hasSuffix = targetText.includes("+") || targetText.includes("k");
+
+      if (counter.classList.contains("animated")) return;
+
+      counter.classList.add("animating");
+      const start = 0;
+      const startTime = performance.now();
+
+      const update = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(start + (target - start) * easeOut);
+
+        let displayValue =
+          target >= 1000
+            ? (current / 1000).toFixed(1).replace(".0", "") + "k"
+            : current.toLocaleString();
+
+        if (hasSuffix && targetText.includes("+")) {
+          displayValue += "+";
+        }
+
+        // Atualiza apenas o span .count-up se existir
+        const countUpSpan = counter.querySelector(".count-up");
+        if (countUpSpan) {
+          countUpSpan.textContent = displayValue.replace(/[^\d.k+]/g, "");
+        } else {
+          counter.textContent = displayValue;
+        }
+
+        if (progress < 1) {
           requestAnimationFrame(update);
         } else {
-          counter.innerText =
-            target >= 1000 ? (target / 1000).toFixed(1) + "k" : target;
+          let finalValue =
+            target >= 1000
+              ? (target / 1000).toFixed(1).replace(".0", "") + "k"
+              : target.toLocaleString();
+
+          if (hasSuffix && targetText.includes("+")) {
+            finalValue += "+";
+          }
+
+          if (countUpSpan) {
+            countUpSpan.textContent = finalValue.replace(/[^\d.k+]/g, "");
+          } else {
+            counter.textContent = finalValue;
+          }
+          counter.classList.remove("animating");
+          counter.classList.add("animated");
         }
       };
-      update();
+
+      requestAnimationFrame(update);
     });
   };
 
+  // Observer para ativar contadores quando visíveis
   const counterSection = document.querySelector(".container-numbers");
   if (counterSection) {
     const counterObserver = new IntersectionObserver(
-      (entries, obs) => {
-        if (entries[0].isIntersecting) {
-          startCounting();
-          obs.disconnect();
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            counterObserver.unobserve(entry.target);
+          }
+        });
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     );
     counterObserver.observe(counterSection);
   }
 
   /* ======================================================
-     10. PARALLAX
+     8. PARALLAX (APENAS PARA #sobre)
   ====================================================== */
   const sobre = document.getElementById("sobre");
   if (sobre) {
-    window.addEventListener("scroll", () => {
-      sobre.style.backgroundPositionY = window.pageYOffset * 0.5 + "px";
-    });
+    const updateParallax = () => {
+      if (window.innerWidth >= 1024) {
+        sobre.style.backgroundPositionY = window.pageYOffset * 0.5 + "px";
+      }
+    };
+
+    // Só ativa parallax em desktop
+    if (window.innerWidth >= 1024) {
+      window.addEventListener("scroll", updateParallax);
+      updateParallax();
+    }
   }
 
   /* ======================================================
-     11. BACK TO TOP
+     9. BOTÃO VOLTAR AO TOPO
   ====================================================== */
   const backToTop = document.getElementById("backToTop");
   if (backToTop) {
-    window.addEventListener("scroll", () => {
+    const updateBackToTop = () => {
       backToTop.classList.toggle("show", window.pageYOffset > 400);
-    });
+    };
+
+    window.addEventListener("scroll", updateBackToTop);
 
     backToTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+
+    // Inicializa
+    updateBackToTop();
   }
 
   /* ======================================================
-     12. SOCIAL FAB
+     10. SOCIAL FAB (MOBILE)
   ====================================================== */
   const socialFab = document.querySelector(".social-fab");
   const socialToggle = document.getElementById("social-toggle");
@@ -240,18 +322,223 @@ document.addEventListener("DOMContentLoaded", () => {
       e.stopPropagation();
       const open = socialFab.classList.toggle("open");
       socialActions.setAttribute("aria-hidden", !open);
+      socialToggle.setAttribute("aria-expanded", open);
     });
 
     document.addEventListener("click", (e) => {
       if (!socialFab.contains(e.target)) {
         socialFab.classList.remove("open");
         socialActions.setAttribute("aria-hidden", "true");
+        socialToggle.setAttribute("aria-expanded", "false");
       }
     });
   }
+
+  /* ======================================================
+     11. NAVBAR LATERAL SCROLL
+  ====================================================== */
+  const navbar = document.querySelector(".navbar");
+  if (navbar) {
+    const handleNavbarScroll = () => {
+      if (window.pageYOffset > 100) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    };
+
+    window.addEventListener("scroll", handleNavbarScroll);
+    handleNavbarScroll();
+  }
+
+  /* ======================================================
+     12. ANIMAÇÃO DOS CARDS DE COMUNIDADES (STAGGER EFFECT)
+  ====================================================== */
+  const communityCards = document.querySelectorAll(".box-comunidade");
+
+  if (communityCards.length > 0) {
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            // Delay progressivo para efeito cascata
+            setTimeout(() => {
+              entry.target.classList.add("visible");
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+            }, index * 100);
+
+            // Para de observar após animar
+            cardObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      }
+    );
+
+    communityCards.forEach((card) => {
+      // Inicializa estilo apenas se não tiver
+      if (!card.style.opacity) {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)";
+      }
+      cardObserver.observe(card);
+    });
+  }
+
+  /* ======================================================
+     13. PREVENÇÃO DE CLIQUE MÚLTIPLO
+  ====================================================== */
+  document
+    .querySelectorAll("a[href^='#'], button[type='button']")
+    .forEach((element) => {
+      element.addEventListener("click", function (e) {
+        if (this.classList.contains("disabled")) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+
+        // Adiciona delay para evitar múltiplos cliques
+        this.classList.add("disabled");
+        setTimeout(() => {
+          this.classList.remove("disabled");
+        }, 1000);
+      });
+    });
+
+  /* ======================================================
+     14. REDIMENSIONAMENTO DA JANELA
+  ====================================================== */
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      // Atualiza Swiper quando a janela é redimensionada
+      if (swiper && swiper.update) {
+        swiper.update();
+      }
+
+      // Re-aplica parallax se necessário
+      const sobre = document.getElementById("sobre");
+      if (sobre && window.innerWidth >= 1024) {
+        sobre.style.backgroundPositionY = window.pageYOffset * 0.5 + "px";
+      }
+    }, 250);
+  });
+
+  /* ======================================================
+     15. BOTTOM NAV HIGHLIGHT (se implementado)
+  ====================================================== */
+  const bottomNavItems = document.querySelectorAll(".bottom-nav .nav-item");
+  const sections = document.querySelectorAll("section[id]");
+
+  if (bottomNavItems.length > 0) {
+    const highlightBottomNav = () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const headerHeight =
+          document.querySelector("header")?.offsetHeight || 80;
+
+        if (scrollY >= sectionTop - headerHeight - 100) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      bottomNavItems.forEach((item) => {
+        item.classList.remove("active");
+        const href = item.getAttribute("href");
+        if (href === `#${current}`) {
+          item.classList.add("active");
+        }
+      });
+    };
+
+    window.addEventListener("scroll", highlightBottomNav);
+    highlightBottomNav();
+  }
 });
 
-// No seu index.js, procure por isto:
-document.querySelectorAll(".reveal, .secao").forEach((elemento) => {
-  revealObserver.observe(elemento); // Garanta que o nome aqui é o mesmo da variável lá em cima
+// ======================================================
+// WINDOW LOAD
+// ======================================================
+window.addEventListener("load", () => {
+  // Remove o preloader se existir
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    preloader.style.opacity = "0";
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 500);
+  }
+
+  // Atualiza Swiper após todas as imagens carregarem
+  if (typeof swiper !== "undefined" && swiper.update) {
+    setTimeout(() => {
+      swiper.update();
+    }, 300);
+  }
+
+  // Verifica swiper mobile
+  checkMobileSwiper();
+});
+
+// ======================================================
+// SWIPER RESPONSIVO PARA MOBILE
+// ======================================================
+const checkMobileSwiper = () => {
+  const swiperContainer = document.querySelector(".mySwiper");
+  if (!swiperContainer) return;
+
+  const isMobile = window.innerWidth <= 768;
+  const swiperWrapper = swiperContainer.querySelector(".swiper-wrapper");
+
+  if (isMobile) {
+    // Desativa swiper no mobile
+    if (swiper && swiper.destroy) {
+      try {
+        swiper.destroy(true, true);
+      } catch (e) {
+        console.log("Swiper já destruído ou não inicializado");
+      }
+    }
+
+    // Adiciona grid
+    if (swiperWrapper) {
+      swiperWrapper.style.display = "grid";
+      swiperWrapper.style.gridTemplateColumns = "1fr";
+      swiperWrapper.style.gap = "25px";
+      swiperWrapper.style.transform = "none !important";
+
+      // Mostra todas as slides
+      document.querySelectorAll(".swiper-slide").forEach((slide) => {
+        slide.style.width = "100%";
+        slide.style.opacity = "1";
+        slide.style.transform = "none";
+      });
+    }
+  } else {
+    // Reativa swiper no desktop apenas se não estiver inicializado
+    if (!swiper || !swiper.initialized) {
+      initSwiper();
+    }
+
+    // Remove estilo de grid
+    if (swiperWrapper) {
+      swiperWrapper.style.display = "";
+      swiperWrapper.style.gridTemplateColumns = "";
+      swiperWrapper.style.gap = "";
+    }
+  }
+};
+
+// Verifica no redimensionamento
+window.addEventListener("resize", () => {
+  setTimeout(checkMobileSwiper, 150);
 });

@@ -8,15 +8,42 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/LogoPlant.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="index.js" defer></script>
 </head>
+
+<!-- Bottom Navigation (mobile) -->
+<nav class="bottom-nav" aria-label="Navegação inferior mobile">
+    <a href="#sobre" class="nav-item">
+        <img src="images/home.svg" alt="Sobre">
+        <span>Sobre</span>
+    </a>
+    <a href="#comunidades" class="nav-item">
+        <img src="images/users.svg" alt="Comunidades">
+        <span>Comunidades</span>
+    </a>
+    <a href="#redes" class="nav-item">
+        <img src="images/instagram.png" alt="Redes">
+        <span>Redes</span>
+    </a>
+    <a href="#parceiros" class="nav-item">
+        <img src="images/handshake.svg" alt="Parceiros">
+        <span>Parceiros</span>
+    </a>
+    <a href="#professores" class="nav-item">
+        <img src="images/users.svg" alt="Professores">
+        <span>Professores</span>
+    </a>
+</nav>
 
 <body>
     <!-- LOGO + MENU -->
     <header>
-        <img src="images/LogoPlantnoHeader.png" alt="Logo" class="logo" onclick="location.reload()">
+        <img src="images/LogoPlantnoHeader.png" alt="Logo Plantel de Dúvidas" class="logo" onclick="location.reload()">
 
-        <nav class="menu">
+        <nav class="menu" aria-label="Menu principal">
             <a href="#sobre">Sobre o Plantel ∑</a>
             <a href="#comunidades">Comunidades ɸ</a>
             <a href="#redes">Redes Sociais Ψ</a>
@@ -25,23 +52,25 @@
         </nav>
 
         <div class="dark-mode-container">
-            <button id="dark-mode-toggle" type="button" title="Alternar tema">
+            <button id="dark-mode-toggle" type="button" title="Alternar tema" aria-label="Alternar modo escuro">
                 <i data-lucide="moon" id="moon-icon"></i>
             </button>
         </div>
 
-        <a id="link" target="_blank" href="https://chat.whatsapp.com/KMwYVUctbqh1sPtlhcs3ip" rel="noopener noreferrer">
+        <a id="link" target="_blank" href="https://chat.whatsapp.com/KMwYVUctbqh1sPtlhcs3ip" rel="noopener noreferrer"
+            aria-label="Entrar nas comunidades no WhatsApp">
             <img src="images/LogozApp.png" id="logo-header-zap" alt="Logo WhatsApp">
             <h3>Comunidades <br>no WhatsApp!</h3>
         </a>
 
         <!-- Hamburger (mobile) -->
-        <button id="hamburger" class="hamburger" type="button" aria-label="Abrir menu">
+        <button id="hamburger" class="hamburger" type="button" aria-label="Abrir menu" aria-expanded="false"
+            aria-controls="mobile-menu">
             <span class="bar"></span>
         </button>
 
         <!-- Mobile menu (slide down) -->
-        <nav id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <nav id="mobile-menu" class="mobile-menu" aria-label="Menu mobile" aria-hidden="true">
             <div class="inner">
                 <a href="#sobre" class="mobile-link">Sobre</a>
                 <a href="#comunidades" class="mobile-link">Comunidades</a>
@@ -53,12 +82,12 @@
     </header>
 
     <!-- Social floating buttons (mobile) -->
-    <div class="social-fab" aria-hidden="false">
-        <button id="social-toggle" class="social-toggle" type="button" aria-label="Abrir redes">≡</button>
+    <div class="social-fab">
+        <button id="social-toggle" class="social-toggle" type="button" aria-label="Abrir redes sociais">≡</button>
         <div id="social-actions" class="social-actions" aria-hidden="true">
             <a href="https://www.instagram.com/planteldeduvidas/" target="_blank" rel="noopener noreferrer"
                 class="social-btn instagram" aria-label="Instagram">
-                <img src="images/instaLogo(2).png" alt="Instagram">
+                <img src="images/instagram.png" alt="Instagram">
             </a>
             <a href="https://discord.com/" target="_blank" rel="noopener noreferrer" class="social-btn discord"
                 aria-label="Discord">
@@ -71,6 +100,10 @@
             <a href="https://chat.whatsapp.com/KMwYVUctbqh1sPtlhcs3ip" target="_blank" rel="noopener noreferrer"
                 class="social-btn whatsapp" aria-label="WhatsApp">
                 <img src="images/LogozApp.png" alt="WhatsApp">
+            </a>
+            <a href="https://t.me/plantelduvidas" target="_blank" rel="noopener noreferrer" class="social-btn telegram"
+                aria-label="Telegram">
+                <img src="images/telegram.png" alt="Telegram">
             </a>
         </div>
     </div>
@@ -86,8 +119,9 @@
         </div>
 
         <div class="hero-cta">
-            <a href="https://chat.whatsapp.com/KMwYVUctbqh1sPtlhcs3ip" target="_blank" class="btn-hero btn-entrar">
-                <img src="images/LogozApp.png" id="logo-header-zap" alt="Logo WhatsApp">
+            <a href="https://chat.whatsapp.com/KMwYVUctbqh1sPtlhcs3ip" target="_blank" class="btn-hero btn-entrar"
+                rel="noopener noreferrer">
+                <img src="images/LogozApp.png" alt="Logo WhatsApp">
                 Entrar na Comunidade
             </a>
             <a href="#sobre" class="btn-hero btn-saiba-mais">
@@ -105,14 +139,16 @@
             <p class="text-info-out">
                 O Plantel é um projeto educativo inovador, uma rede de apoio educacional interdisciplinar que conecta
                 alunos e professores
-                com o propósito central de ajuda mútua, resolução de dúvidas e <b>democratização do ensino</b>, com todo
+                com o propósito central de ajuda mútua, resolução de dúvidas e <strong>democratização do
+                    ensino</strong>,
+                com todo
                 apoio sendo aberto ao público.
             </p>
             <p class="text-info-out">
                 Nosso objetivo fundamental é contribuir de forma complementar ao processo de ensino-aprendizagem,
                 auxiliando na construção do
                 conhecimento a partir de suas próprias questões, atuando assim sobre o
-                principal fator de desenvolvimento intelectual: <b>A DÚVIDA</b>.
+                principal fator de desenvolvimento intelectual: <strong>A DÚVIDA</strong>.
             </p>
             <p class="text-info-out">
                 Diferente de tudo antes visto, o Plantel se diferencia ao atuar
@@ -131,26 +167,27 @@
             <div class="line"></div>
             <div class="container-numbers">
                 <div class="numbers">
-                    <div class="numbers-text">+<span class="count-up" data-target="1300">0</span></div>
+                    <div class="numbers-text" data-target="1300">+<span class="count-up">0</span></div>
                     <div class="numbers-text-label">seguidores</div>
                 </div>
 
                 <div class="numbers">
-                    <div class="numbers-text">+<span class="count-up" data-target="14900">0</span></div>
+                    <div class="numbers-text" data-target="14900">+<span class="count-up">0</span></div>
                     <div class="numbers-text-label">visualizações</div>
                 </div>
 
                 <div class="numbers">
-                    <div class="numbers-text">+<span class="count-up" data-target="8">0</span></div>
+                    <div class="numbers-text" data-target="8">+<span class="count-up">0</span></div>
                     <div class="numbers-text-label">parcerias firmadas</div>
                 </div>
 
                 <div class="numbers">
-                    <div class="numbers-text"><span class="count-up" data-target="26">0</span>/26</div>
+                    <div class="numbers-text" data-target="26"><span class="count-up">0</span>/26</div>
                     <div class="numbers-text-label">estados</div>
                 </div>
             </div>
         </section>
+
         <section id="como-funciona" class="how-it-works secao">
             <div class="container">
                 <div class="section-header">
@@ -161,7 +198,7 @@
                 <div class="timeline-container">
                     <div class="timeline-line"></div>
 
-                    <div class="timeline-item side-left" style="--delay: 0.1s">
+                    <div class="timeline-item side-left">
                         <div class="timeline-icon">
                             <i data-lucide="message-circle"></i>
                         </div>
@@ -172,7 +209,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item side-right" style="--delay: 0.2s">
+                    <div class="timeline-item side-right">
                         <div class="timeline-icon">
                             <i data-lucide="users"></i>
                         </div>
@@ -183,7 +220,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item side-left" style="--delay: 0.3s">
+                    <div class="timeline-item side-left">
                         <div class="timeline-icon">
                             <i data-lucide="book-open"></i>
                         </div>
@@ -194,7 +231,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item side-right" style="--delay: 0.4s">
+                    <div class="timeline-item side-right">
                         <div class="timeline-icon">
                             <i data-lucide="trophy"></i>
                         </div>
@@ -207,26 +244,31 @@
                 </div>
             </div>
         </section>
+
         <section id="comunidades" class="secao">
             <h2>Comunidades</h2>
             <div class="line"></div>
             <div class="container-numbers">
                 <div class="numbers">
-                    <div class="numbers-text">+<span class="count-up" data-target="3000">0</span></div>
-                    <div class="numbers-text-label">membros</div>
+                    <div class="numbers-text" data-target="1300">+<span class="count-up">0</span></div>
+                    <div class="numbers-text-label">seguidores</div>
                 </div>
 
                 <div class="numbers">
-                    <div class="numbers-text"><span class="count-up" data-target="2">0</span></div>
-                    <div class="numbers-text-label">comunidades</div>
+                    <div class="numbers-text" data-target="14900">+<span class="count-up">0</span></div>
+                    <div class="numbers-text-label">visualizações</div>
                 </div>
 
                 <div class="numbers">
-                    <div class="numbers-text"><span class="count-up" data-target="9">0</span></div>
-                    <div class="numbers-text-label">grupos</div>
+                    <div class="numbers-text" data-target="8">+<span class="count-up">0</span></div>
+                    <div class="numbers-text-label">parcerias firmadas</div>
+                </div>
+
+                <div class="numbers">
+                    <div class="numbers-text" data-target="26"><span class="count-up">0</span>/26</div>
+                    <div class="numbers-text-label">estados</div>
                 </div>
             </div>
-
             <p class="text-info-out">
                 Por meio das nossas comunidades, conseguimos proporcionar as mais diversas ajudas ao estudante,
                 sanar dúvidas, oferecer materias de qualidade, apoio dos professores e dos monitores de plantão,
@@ -348,17 +390,6 @@
                         ✅ + 250 membros
                     </p>
                 </div>
-                <div class="box-comunidade">
-                    <div class="box-comunidade-top">
-                        <img src="images/LogoExatas.png" class="logo-comunidade" alt="Logo Plantel Nutrição">
-                        <h3 class="text-info-in">Plantel de Nutrição</h3>
-                    </div>
-                    <p class="text-info-in-inside">
-                        Espaço para conversas relacionadas à saúde, academia e nutrição bem como informações sobre
-                        testes de apitdão física (TAFs) dos concursos militares e performace de estudo.<br><br>
-                        ✅ Acompanhado por nutricionista
-                    </p>
-                </div>
             </div>
         </section>
 
@@ -366,35 +397,46 @@
             <h2>Redes Sociais</h2>
             <div class="line"></div>
             <div class="container-redes">
-                <div class="box-redes" onclick="window.open('https://www.instagram.com/planteldeduvidas/', '_blank')">
-                    <img src="images/instaLogo.png" style="width: 90px; height: 90px; margin: auto;">
+                <div class="box-redes" onclick="window.open('https://www.instagram.com/planteldeduvidas/', '_blank')"
+                    role="button" tabindex="0">
+                    <img src="images/instaLogo.png" style="width: 90px; height: 90px; margin: auto;" alt="Instagram">
                     <h3 class="title-rede">Instagram</h3>
                     <p class="text-info-in-inside">Acompanhe nossas divulgações, novidades e acesso ao drive no link da
                         bio.</p>
                 </div>
-                <div class="box-redes" onclick="window.open('https://discord.gg/dbKeAz6Y', '_blank')">
-                    <img src="images/discord.png" style="width: 90px; height: 80px; margin: auto;">
+                <div class="box-redes" onclick="window.open('https://discord.gg/dbKeAz6Y', '_blank')" role="button"
+                    tabindex="0">
+                    <img src="images/discord.png" style="width: 90px; height: 80px; margin: auto;" alt="Discord">
                     <h3 class="title-rede">Discord</h3>
                     <p class="text-info-in-inside">Espaço criado para aqueles que buscam fortificar seus estudos com
                         metas diárias e mensais bem como participar de sessões de estudo.</p>
                 </div>
-                <div class="box-redes" onclick="window.open('https://www.youtube.com/@PlanteldeDuvidas', '_blank')">
-                    <img src="images/youtube.png" style="width: 100px; height: 100px; margin: auto;">
+                <div class="box-redes" onclick="window.open('https://www.youtube.com/@PlanteldeDuvidas', '_blank')"
+                    role="button" tabindex="0">
+                    <img src="images/youtube.png" style="width: 100px; height: 100px; margin: auto;" alt="YouTube">
                     <h3 class="title-rede">Youtube</h3>
                     <p class="text-info-in-inside">Aulas, resoluções e conteúdos voltados para o ramo militar.</p>
                 </div>
-                <div class="box-redes" onclick="window.open('https://chat.whatsapp.com/KMwYVUctbqh1sPtlhcs3ip')">
-                    <img src="images/LogoZap(2).png" style="width: 80px; height: 80px; margin: auto;">
+                <div class="box-redes" onclick="window.open('https://chat.whatsapp.com/KMwYVUctbqh1sPtlhcs3ip')"
+                    role="button" tabindex="0">
+                    <img src="images/LogoZap(2).png" style="width: 80px; height: 80px; margin: auto;" alt="WhatsApp">
                     <h3 class="title-rede">WhatsApp</h3>
                     <p class="text-info-in-inside">Comunidade do whatsApp 1. Acesso ao Plantel Ψ</p>
                 </div>
-                <div class="box-redes" onclick="window.open('https://chat.whatsapp.com/G8CA8y1gvKlJ7I4tKMO7dZ')">
-                    <img src="images/LogoZap(2).png" style="width: 80px; height: 80px; margin: auto;">
+                <div class="box-redes" onclick="window.open('https://chat.whatsapp.com/G8CA8y1gvKlJ7I4tKMO7dZ')"
+                    role="button" tabindex="0">
+                    <img src="images/LogoZap(2).png" style="width: 80px; height: 80px; margin: auto;" alt="WhatsApp">
                     <h3 class="title-rede">WhatsApp</h3>
                     <p class="text-info-in-inside">Comunidade do whatsApp 2. Acesso ao Plantel ∑</p>
                 </div>
+                <div class="box-redes" onclick="window.open('https://t.me/plantelduvidas')">
+                    <img src="images/telegram.png" style="width: 70px; height: 70px; margin: auto;">
+                    <h3 class="title-rede">Telegram</h3>
+                    <p class="text-info-in-inside">Extensão das atividades que ocorrem nas outras comunidades</p>
+                </div>
             </div>
         </section>
+
         <section id="parceiros" class="secao">
             <h2>Parceiros</h2>
             <div class="line"></div>
@@ -407,26 +449,26 @@
 
         <section class="hero-parceiro" data-parceiro="cosseno">
             <img src="Logo_parceiros/cosseno_logo.jpeg" alt="Cosseno" class="logo-parceiros logo-cosseno"
-                onclick="window.open('https://cosseno.com')">
+                onclick="window.open('https://cosseno.com')" role="button" tabindex="0">
             <p class="hero-parceiro-text">Plataforma do cosseno</p>
         </section>
         <section class="hero-parceiro" data-parceiro="fenix">
             <img src="Logo_parceiros/logofenix.png" alt="Fênix" class="logo-parceiros logo-fenix"
-                onclick="window.open('https://fenixconcursosmilitares.com.br/')">
+                onclick="window.open('https://fenixconcursosmilitares.com.br/')" role="button" tabindex="0">
             <p class="hero-parceiro-text">Fênix Concursos Militares</p>
         </section>
         <section class="hero-parceiro" data-parceiro="japa">
             <img src="Logo_parceiros/logo-japamath-v1.webp" alt="Japa Math" class="logo-parceiros logo-japa"
-                onclick="window.open('https://japamath.com.br/')">
+                onclick="window.open('https://japamath.com.br/')" role="button" tabindex="0">
         </section>
         <section class="hero-parceiro" data-parceiro="puppin">
             <img src="Logo_parceiros/logo-puppin.png" alt="Thay Puppin" class="logo-parceiros"
-                onclick="window.open('https://linktr.ee/thaylisepuppin')">
+                onclick="window.open('https://linktr.ee/thaylisepuppin')" role="button" tabindex="0">
             <p class="hero-parceiro-text">Mentoria de Redação, prof.Thay Puppin</p>
         </section>
         <section class="hero-parceiro" data-parceiro="mobius">
             <img src="Logo_parceiros/mobius.jpg" alt="Editora Mobius" class="logo-parceiros logo-mobius"
-                onclick="window.open('https://mobiuseditora.com.br/')">
+                onclick="window.open('https://mobiuseditora.com.br/')" role="button" tabindex="0">
             <p class="hero-parceiro-text">Mobius Editora</p>
         </section>
 
@@ -440,199 +482,208 @@
             </div>
         </div>
 
+        <!--Menu-->
+        <nav class="navbar" id="redes" aria-label="Redes sociais">
+            <ul>
+                <li>
+                    <a href="https://www.instagram.com/planteldeduvidas/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/instagram.png" alt="Instagram">
+                        <span>Instagram</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://discord.gg/dbKeAz6Y" target="_blank" rel="noopener noreferrer">
+                        <img src="images/discordLogo.png" alt="Discord">
+                        <span>Discord</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/@PlanteldeDuvidas" target="_blank" rel="noopener noreferrer">
+                        <img src="images/youtubeLogo.png" alt="YouTube">
+                        <span>Youtube</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://t.me/plantelduvidas" target="_blank" rel="noopener noreferrer">
+                        <img src="images/telegram.png" alt="Telegram">
+                        <span>Telegram</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <section id="professores" class="secao">
+            <h2>Professores</h2>
+            <div class="line"></div>
+            <p class="text-info-out">
+                Contamos com uma equipe de mestres altamente qualificados e dedicados a transformar a sua trajetória
+                acadêmica.
+            </p>
+
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">TODOS</button>
+                <button class="filter-btn" data-filter="exatas">EXATAS</button>
+                <button class="filter-btn" data-filter="humanas">HUMANAS</button>
+                <button class="filter-btn" data-filter="linguagens">LINGUAGENS</button>
+            </div>
+
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide card-professor" data-category="exatas">
+                        <div class="foto-professor"><img src="fotos-professores/JP-foto.jpeg"
+                                alt="Professor Josoaldo Pires">
+                        </div>
+                        <div class="info-professor">
+                            <h3>Prof. Josoaldo Pires</h3>
+                            <h2>@proff_jp</h2>
+                            <span class="materia">Física</span>
+                            <p>Professor de física nível ITA, IME, EFOMM. Materiais de qualidade!</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide card-professor" data-category="exatas">
+                        <div class="foto-professor foto-germano"><img src="fotos-professores/germano.png"
+                                alt="Professor Mateus Germano"></div>
+                        <div class="info-professor">
+                            <h3>Prof. Mateus Germano</h3>
+                            <h2>@mateus.germano.2001</h2>
+                            <span class="materia">Todas as matérias</span>
+                            <p>Materiais para concursos militares. Resumos e Apostilas de todas as matérias.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide card-professor" data-category="humanas">
+                        <div class="foto-professor"><img src="fotos-professores/pestana.jpeg"
+                                alt="Professor de História, pestana"></div>
+                        <div class="info-professor">
+                            <h3>Prof. Pestana</h3>
+                            <h2>@qgdopestana</h2>
+                            <span class="materia">História</span>
+                            <p>Sou especialista em História para Concursos Militares. Atuo há mais de 15 anos ajudando
+                                centenas de alunos a conquistar o gabarito nas provas de história da ESA, EsPCEx e CN.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide card-professor" data-category="exatas">
+                        <div class="foto-professor"><img src="fotos-professores/canellas.webp"
+                                alt="Professor de História"></div>
+                        <div class="info-professor">
+                            <h3>Prof. Canellas</h3>
+                            <h2>@williamcanellas</h2>
+                            <span class="materia">Matemática</span>
+                            <p>Mestre pelo IMPA, autor do livro 'Matemática para o infinito e além'. Grande parcerio do
+                                Plantel de Dúvidas</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide card-professor" data-category="humanas">
+                        <div class="foto-professor"><img src="images/prof2.jpg" alt="Professor de História"></div>
+                        <div class="info-professor">
+                            <h3>Nome da Prof</h3>
+                            <span class="materia">História</span>
+                            <p>Descrição curta aqui.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="professores-footer">
+                <h3>Quer fazer parte do time de professores?</h3>
+                <div class="hero-cta">
+                    <a href="https://www.instagram.com/plantel_de_duvidas/" target="_blank" class="btn-hero btn-entrar"
+                        rel="noopener noreferrer">
+                        Seja um Professor
+                        <i data-lucide="chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq-section secao">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Dúvidas Frequentes</h2>
+                    <div class="line"></div>
+                </div>
+
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            O Plantel de Dúvidas é gratuito?
+                            <i data-lucide="chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sim! O Plantel é 100% gratuito. Nossa missão é democratizar o ensino e proporcionar apoio
+                                educacional de qualidade para todos, sem nenhum custo.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Como faço para entrar nas comunidades?
+                            <i data-lucide="chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Basta clicar no botão 'Entrar na Comunidade' aqui no site ou acessar nossos links do
+                                WhatsApp. Você será redirecionado para o grupo e poderá participar imediatamente.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Quem são os professores do Plantel?
+                            <i data-lucide="chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Nossos professores são voluntários qualificados, muitos aprovados em vestibulares
+                                competitivos como ITA, IME e concursos militares. Eles dedicam seu tempo para ajudar
+                                outros estudantes.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Posso tirar dúvidas de qualquer matéria?
+                            <i data-lucide="chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sim! Temos comunidades específicas para Exatas, Humanas, Linguagens, Redação e muito
+                                mais.
+                                Cada área tem professores e monitores especializados.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Como funciona o Plantel Listas?
+                            <i data-lucide="chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>O Plantel Listas é nosso repositório de materiais de estudo. Oferecemos mais de 300
+                                listas de
+                                exercícios organizadas por assunto, provas anteriores de concursos militares e materiais
+                                exclusivos dos parceiros.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Posso me tornar um professor/monitor?
+                            <i data-lucide="chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Claro! Se você tem conhecimento para compartilhar e quer ajudar outros estudantes, entre
+                                em
+                                contato conosco pelo Instagram. Valorizamos muito quem quer contribuir com a comunidade.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <button id="backToTop" type="button" title="Voltar ao topo">↑</button>
-
-    <!--Menu-->
-    <nav class="navbar" id="redes">
-        <ul>
-            <li>
-                <a href="https://www.instagram.com/planteldeduvidas/" target="_blank" rel="noopener noreferrer">
-                    <img src="images/insta.png" alt="Instagram">
-                    <span>Instagram</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://discord.gg/dbKeAz6Y" target="_blank" rel="noopener noreferrer">
-                    <img src="images/discord.png" alt="Discord">
-                    <span>Discord</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.youtube.com/@PlanteldeDuvidas" target="_blank" rel="noopener noreferrer">
-                    <img src="images/youtube.png" alt="YouTube">
-                    <span>Youtube</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <section id="professores" class="secao">
-        <h2>Professores</h2>
-        <div class="line"></div>
-        <p class="text-info-out">
-            Contamos com uma equipe de mestres altamente qualificados e dedicados a transformar a sua trajetória
-            acadêmica.
-        </p>
-
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">TODOS</button>
-            <button class="filter-btn" data-filter="exatas">EXATAS</button>
-            <button class="filter-btn" data-filter="humanas">HUMANAS</button>
-            <button class="filter-btn" data-filter="linguagens">LINGUAGENS</button>
-        </div>
-
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide card-professor" data-category="linguagens">
-                    <div class="foto-professor"><img src="fotos-professores/fumanga.png" alt="fumanga"></div>
-                    <div class="info-professor">
-                        <h3>Prof. Fumanga</h3>
-                        <h2>@fumanga_textos</h2>
-                        <p>Mais de 40 anos de experiência em redação para concursos militares, concursos públicos,
-                            vestibulares e o ENEM.</p>
-                    </div>
-                </div>
-                <div class="swiper-slide card-professor" data-category="exatas">
-                    <div class="foto-professor"><img src="fotos-professores/JP-foto.jpeg" alt="JP"></div>
-                    <div class="info-professor">
-                        <h3>Prof. Josoaldo Pires</h3>
-                        <h2>@proff_jp</h2>
-                        <p>Professor de física nível ITA, IME, EFOMM. Materiais de qualidade!</p>
-                    </div>
-                </div>
-                <div class="swiper-slide card-professor" data-category="exatas">
-                    <div class="foto-professor foto-germano"><img src="fotos-professores/germano.png" alt="germano">
-                    </div>
-                    <div class="info-professor">
-                        <h3>Prof. Mateus Germano</h3>
-                        <h2>@mateus.germano.2001</h2>
-                        <p>Materiais para concursos militares. Resumos e Apostilas de todas as matérias.</p>
-                    </div>
-                </div>
-                <div class="swiper-slide card-professor" data-category="humanas">
-                    <div class="foto-professor"><img src="images/prof2.jpg" alt=""></div>
-                    <div class="info-professor">
-                        <h3>Nome da Prof</h3>
-                        <span class="materia">História</span>
-                        <p>Descrição curta aqui.</p>
-                    </div>
-                </div>
-                <div class="swiper-slide card-professor" data-category="exatas">
-                    <div class="foto-professor"><img src="images/prof1.jpg" alt=""></div>
-                    <div class="info-professor">
-                        <h3>Nome do Prof</h3>
-                        <span class="materia">Matemática</span>
-                        <p>Descrição curta aqui.</p>
-                    </div>
-                </div>
-                <div class="swiper-slide card-professor" data-category="humanas">
-                    <div class="foto-professor"><img src="images/prof2.jpg" alt=""></div>
-                    <div class="info-professor">
-                        <h3>Nome da Prof</h3>
-                        <span class="materia">História</span>
-                        <p>Descrição curta aqui.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-        <div class="professores-footer">
-            <h3>Quer fazer parte do time de professores?</h3>
-            <div class="hero-cta">
-                <a href="https://www.instagram.com/plantel_de_duvidas/" target="_blank" class="btn-hero btn-entrar">
-                    Seja um Professor
-                    <i data-lucide="chevron-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-    <section id="faq" class="faq-section secao">
-        <div class="container">
-            <div class="section-header">
-                <h2>Dúvidas Frequentes</h2>
-                <div class="line"></div>
-            </div>
-
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        O Plantel de Dúvidas é gratuito?
-                        <i data-lucide="chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Sim! O Plantel é 100% gratuito. Nossa missão é democratizar o ensino e proporcionar apoio
-                            educacional de qualidade para todos, sem nenhum custo.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Como faço para entrar nas comunidades?
-                        <i data-lucide="chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Basta clicar no botão 'Entrar na Comunidade' aqui no site ou acessar nossos links do
-                            WhatsApp. Você será redirecionado para o grupo e poderá participar imediatamente.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Quem são os professores do Plantel?
-                        <i data-lucide="chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Nossos professores são voluntários qualificados, muitos aprovados em vestibulares
-                            competitivos como ITA, IME e concursos militares. Eles dedicam seu tempo para ajudar outros
-                            estudantes.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Posso tirar dúvidas de qualquer matéria?
-                        <i data-lucide="chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Sim! Temos comunidades específicas para Exatas, Humanas, Linguagens, Redação e muito mais.
-                            Cada área tem professores e monitores especializados.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Como funciona o Plantel Listas?
-                        <i data-lucide="chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>O Plantel Listas é nosso repositório de materiais de estudo. Oferecemos mais de 300 listas de
-                            exercícios organizadas por assunto, provas anteriores de concursos militares e materiais
-                            exclusivos dos parceiros.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Posso me tornar um professor/monitor?
-                        <i data-lucide="chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Claro! Se você tem conhecimento para compartilhar e quer ajudar outros estudantes, entre em
-                            contato conosco pelo Instagram. Valorizamos muito quem quer contribuir com a comunidade.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="index.js"></script>
+    <button id="backToTop" type="button" title="Voltar ao topo" aria-label="Voltar ao topo">↑</button>
 
     <!-- FOOTER -->
     <footer class="main-footer">
@@ -662,6 +713,8 @@
             <p class="dev-team">Desenvolvido pela Equipe de Desenvolvimento do Plantel de Dúvidas</p>
         </div>
     </footer>
+
+
 </body>
 
 </html>

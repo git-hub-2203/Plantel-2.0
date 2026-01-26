@@ -1,9 +1,42 @@
 /* ======================================================
-   SAFETY & FALLBACK LAYER (AUTO-GENERATED)
-   - Prevents invisible content if JS fails
-   - Reduces repaint/reflow cost
-   - Keeps animations progressive-enhancement only
+   SAFETY & PROGRESSIVE ENHANCEMENT
+   - Conteúdo nunca fica invisível se JS falhar
 ====================================================== */
+
+/* Por padrão: tudo visível */
+.secao,
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Se JS ativar (opcional): começa oculto e revela por classe .visible */
+body.js .reveal,
+body.js .secao.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* Respeita reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+
+  .secao,
+  .reveal,
+  .box-comunidade,
+  .box-redes,
+  .card-professor,
+  #backToTop,
+  .social-actions,
+  .social-toggle,
+  .logo-parceiros {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
 
 /* ================= VARIÁVEIS E CONFIGURAÇÕES GERAIS ================= */
 :root {
@@ -20,6 +53,11 @@
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   --gradient-overlay: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
+  --hero-height: 85vh;
+  --hero-padding: 0 20px;
+  --hero-margin-bottom: 25vh;
+  --logo-size: 200px;
+  --logo-radius: 40px;
 }
 
 * {
@@ -38,15 +76,6 @@ body {
   color: var(--text-dark);
   line-height: 1.6;
   overflow-x: hidden;
-}
-
-html,
-body {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  /* Evita o scroll lateral "fantasma" */
   -webkit-font-smoothing: antialiased;
   /* Deixa a fonte mais bonita no iPhone */
 }
@@ -110,10 +139,6 @@ header {
   transition: var(--transition);
 }
 
-.menu a:hover::after {
-  width: 100%;
-}
-
 .menu a:hover {
   color: var(--primary-color);
 }
@@ -152,23 +177,11 @@ header {
   box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
 }
 
-.line {
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--primary-color),
-    transparent
-  );
-  width: 250px;
-  height: 4px;
-  margin: 0 auto 40px;
-  border-radius: 10px;
-}
-
 /* ================= HERO SECTION (COM EFEITO PARALLAX) ================= */
 .hero {
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
     url("images/bandeirabrasil.jpg");
   background-size: cover;
   background-position: center;
@@ -209,18 +222,24 @@ header {
 
 /* Estilo base dos botões */
 .btn-hero {
-  padding: 12px 28px;
+  padding: 10px 20px;
   border-radius: 50px;
   font-family: "Pathway Gothic One", sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   text-decoration: none;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; /* Espaço entre o texto e a seta */
+  gap: 8px; /* Espaço entre o texto e a seta */
   transition: all 0.3s ease;
+}
+
+.btn-hero img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 /* Botão Entrar (Verde) */
@@ -274,12 +293,6 @@ header {
   background: var(--white);
 }
 
-/* Quando o JS detectar o scroll, adiciona esta classe */
-.secao.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .secao:nth-child(even) {
   background: var(--bg-light);
 }
@@ -311,153 +324,256 @@ header {
   color: #444;
   text-align: justify;
   max-width: 900px;
-  margin: 0 auto 50px;
-  margin-top: 35px;
+  margin: 35px auto 50px;
 }
 
-/* ================= CARDS DE COMUNIDADES ================= */
-/* Container que segura os cards */
-/* Container que segura todos os cards */
+/* ================= CARDS DE COMUNIDADES (VERSÃO PROFISSIONAL) ================= */
 .container-comunidades {
-  display: flex;
-  flex-wrap: wrap; /* PERMITE QUE OS CARDS DESÇAM PARA A PRÓXIMA LINHA */
-  gap: 20px;
-  justify-content: center;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
   width: 100%;
-  opacity: 1 !important; /* GARANTE VISIBILIDADE */
-  visibility: visible !important;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+  align-items: stretch;
 }
 
-/* O Card Individual */
 .box-comunidade {
-  flex: 1 1 300px; /* Tenta ter 300px, se não couber, desce */
-  max-width: 380px; /* Largura máxima para não ficar gigante no PC */
-  min-height: 250px; /* Garante uma altura mínima */
-  background-color: var(--white);
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: var(--shadow);
+  opacity: 0;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.03),
+    0 10px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  opacity: 1 !important; /* Força a aparição já que tiramos o reveal */
-  transform: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* Ajuste para Telemóveis (Responsividade) */
-@media (max-width: 480px) {
-  .container-comunidades {
-    padding: 10px;
-    gap: 15px;
-  }
-
-  .box-comunidade {
-    flex: 1 1 100%; /* No telemóvel, ocupa a largura toda */
-    max-width: 100%;
-    margin: 0;
-  }
+/* Animar quando entrar na tela */
+.box-comunidade.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
+/* Hover elegante */
 .box-comunidade:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.08),
+    0 6px 12px rgba(46, 125, 50, 0.08);
+  border-color: var(--accent-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Parte de cima do card (Verde) */
+/* Cabeçalho do card - Limpo e elegante */
 .box-comunidade-top {
-  background: var(--primary-color);
-  padding: 20px;
+  background: linear-gradient(135deg, #2e7d32, #4caf50);
+  padding: 24px 20px;
   display: flex;
   align-items: center;
-  gap: 15px;
-  min-height: 88px;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Linha decorativa sutil no topo */
+.box-comunidade-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Logo com borda sutil */
 .logo-comunidade {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid white;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
   object-fit: cover;
+  background: white;
+  padding: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-/* Estilo do Texto dentro do Card */
+.box-comunidade:hover .logo-comunidade {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Título */
+.text-info-in {
+  font-size: 1.6rem;
+  color: white;
+  font-family: "Pathway Gothic One", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Conteúdo do card */
 .text-info-in-inside {
-  padding: 20px;
   font-size: 1rem;
-  color: var(--text-dark);
-  /* No dark mode, isso vai mudar via JS */
+  line-height: 1.7;
+  color: #444;
+  padding: 24px;
+  flex: 1;
+  background: linear-gradient(
+    to bottom,
+    transparent 95%,
+    rgba(76, 175, 80, 0.03) 100%
+  );
 }
 
-/* Dark Mode para os Cards */
+/* Destaques dentro do card (lista de benefícios) */
+.box-comunidade-listas-efeito,
+.box-comunidade-efeito {
+  background: #f8fdf8;
+  margin: 0 24px 24px;
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 4px solid var(--accent-color);
+  position: relative;
+}
+
+/* Ícone sutil no destaque */
+.box-comunidade-listas-efeito::before,
+.box-comunidade-efeito::before {
+  content: "✓";
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  font-weight: bold;
+  opacity: 0.3;
+}
+
+/* Itens com check verde */
+.box-comunidade-listas-efeito p,
+.box-comunidade-efeito p {
+  color: #2e7d32;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.box-comunidade-listas-efeito p:before,
+.box-comunidade-efeito p:before {
+  content: "• ";
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+/* ================= DARK MODE ELEGANTE ================= */
 body.dark-theme .box-comunidade {
   background: #1e1e1e;
   border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-theme .box-comunidade:hover {
+  border-color: rgba(76, 175, 80, 0.3);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.2),
+    0 6px 12px rgba(76, 175, 80, 0.1);
 }
 
 body.dark-theme .text-info-in-inside {
-  color: #ffffff !important;
+  color: #e0e0e0;
+  background: linear-gradient(
+    to bottom,
+    transparent 95%,
+    rgba(76, 175, 80, 0.05) 100%
+  );
 }
 
-.text-info-in {
-  font-size: 1.8rem;
-  color: var(--white);
-  font-family: "Pathway Gothic One", sans-serif;
+body.dark-theme .box-comunidade-listas-efeito,
+body.dark-theme .box-comunidade-efeito {
+  background: rgba(46, 125, 50, 0.08);
+  border-left-color: var(--accent-color);
 }
 
-.text-info-in-inside {
-  font-size: 1.05rem;
-  padding: 25px;
-  color: #555;
-  flex: 1 1 auto;
-  /* garante que o conteúdo principal cresça para preencher o card */
+body.dark-theme .box-comunidade-listas-efeito p,
+body.dark-theme .box-comunidade-efeito p {
+  color: #a5d6a7;
 }
 
-.box-comunidade-listas-efeito {
-  background: #f1f8e9;
-  /* Verde bem clarinho */
-  margin: 0 20px 20px;
-  border-radius: 15px;
-  border-left: 6px solid var(--accent-color);
+/* ================= RESPONSIVIDADE ================= */
+@media (max-width: 768px) {
+  .container-comunidades {
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .box-comunidade-top {
+    padding: 20px;
+    gap: 12px;
+  }
+
+  .logo-comunidade {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+  }
+
+  .text-info-in {
+    font-size: 1.4rem;
+  }
+
+  .text-info-in-inside {
+    padding: 20px;
+    font-size: 0.95rem;
+  }
+
+  .box-comunidade-listas-efeito,
+  .box-comunidade-efeito {
+    margin: 0 20px 20px;
+    padding: 16px;
+  }
 }
 
-/* Variante de efeito para outros boxes (compatibilidade) */
-.box-comunidade-efeito {
-  background: #f1f8e9;
-  /* Verde bem clarinho */
-  margin: 0 20px 20px;
-  border-radius: 15px;
-  border-left: 6px solid var(--accent-color);
+@media (max-width: 480px) {
+  .container-comunidades {
+    grid-template-columns: 1fr;
+  }
+
+  .box-comunidade {
+    border-radius: 14px;
+  }
 }
 
-/* ================= NUMBERS (BLOCOS DE METRICS) ================= */
+/* ================= NUMBERS (BLOCOS DE METRICS) - ATUALIZADO ================= */
 .container-numbers {
   display: flex;
   flex-wrap: wrap;
-  /* Essencial: permite quebrar linha no celular */
   justify-content: center;
-  /* Centraliza horizontalmente os itens */
   align-items: center;
-  /* Centraliza verticalmente */
   gap: 30px;
-  /* Espaçamento entre os blocos */
   width: 100%;
   max-width: 1200px;
-  /* Limita a largura em telas muito grandes */
   margin: 0 auto;
-  /* Centraliza o container inteiro na página */
   padding: 20px;
 }
 
 .numbers {
   flex: 1 1 200px;
-  /* Tenta ocupar 200px, mas cresce se houver espaço */
   max-width: 280px;
-  /* Evita que o número fique "gigante" em telas médias */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Centraliza o texto e a label internamente */
   text-align: center;
 }
 
@@ -467,6 +583,40 @@ body.dark-theme .text-info-in-inside {
   display: block;
   width: 100%;
   color: var(--primary-color);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  opacity: 0; /* Inicia invisível */
+  transform: translateY(20px); /* Posição inicial para animação */
+  transition: transform 0.3s ease; /* Apenas para transições suaves */
+}
+
+/* Estado ANIMANDO */
+.numbers-text.animating {
+  opacity: 1;
+  animation: countUp 0.8s ease-out forwards;
+}
+
+/* Estado FINALIZADO */
+.numbers-text.animated {
+  opacity: 1;
+  transform: translateY(0);
+  color: var(--primary-color);
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Dark mode para animação */
+body.dark-theme .numbers-text.animating {
+  color: #81c784 !important;
+  text-shadow: 0 0 10px rgba(129, 199, 132, 0.4);
 }
 
 .numbers-text-label {
@@ -474,8 +624,54 @@ body.dark-theme .text-info-in-inside {
   font-weight: bold;
   text-transform: uppercase;
   color: var(--text-dark);
+  margin-top: 8px;
+  opacity: 0; /* Começa invisível */
+  transform: translateY(10px);
+  transition: all 0.5s ease 0.3s; /* Delay para aparecer depois do número */
 }
 
+/* Quando o número terminar de animar, mostra o label */
+.numbers-text.animated + .numbers-text-label,
+.numbers-text.animating + .numbers-text-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================= ANIMAÇÃO DO CONTADOR ATUALIZADA ================= */
+@keyframes countUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    color: #2e7d32; /* Cor inicial (mais escura) */
+  }
+  50% {
+    transform: translateY(-5px) scale(1.05);
+    color: #4caf50; /* Cor intermediária (mais vibrante) */
+    text-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    color: var(--primary-color); /* Cor final */
+  }
+}
+
+/* Efeito de pulso suave quando termina a contagem */
+@keyframes gentlePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.numbers-text.animating:after {
+  animation: gentlePulse 0.3s ease 0.8s;
+}
+
+/* ================= SEÇÃO NOSSO ALCANCE (REDES DE APOIO) ================= */
 .container-redes {
   display: grid;
   /* Isso cria colunas automáticas de no mínimo 300px */
@@ -495,8 +691,10 @@ body.dark-theme .text-info-in-inside {
   background: var(--white);
   border-radius: 16px;
   padding: 24px;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.3s ease, border-color 0.3s ease !important;
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: var(--shadow);
 }
@@ -600,35 +798,7 @@ body.dark-theme .text-info-in-inside {
   justify-content: flex-end;
 }
 
-/* Responsividade Mobile */
-@media (max-width: 768px) {
-  .timeline-line {
-    left: 30px;
-    transform: none;
-  }
-  .timeline-icon {
-    left: 30px;
-    transform: translateX(-50%);
-  }
-  .timeline-item {
-    justify-content: flex-start;
-    padding-left: 70px;
-  }
-  .timeline-content {
-    width: 100%;
-  }
-}
-
 /*=================== SEÇÃO PARCEIROS =================*/
-:root {
-  --hero-height: 85vh;
-  --hero-padding: 0 20px;
-  --hero-margin-bottom: 25vh;
-  --gradient-overlay: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
-  --logo-size: 200px;
-  --logo-radius: 40px;
-}
-
 .hero-parceiro {
   height: var(--hero-height);
   background-size: cover;
@@ -647,7 +817,7 @@ body.dark-theme .text-info-in-inside {
   width: var(--logo-size);
   border-radius: var(--logo-radius);
   box-shadow: var(--shadow);
-  transition: var(--transition) !important;
+  transition: var(--transition);
 }
 
 .logo-parceiros:hover {
@@ -677,8 +847,8 @@ body.dark-theme .text-info-in-inside {
 }
 
 .hero-parceiro[data-parceiro="mobius"] {
-  background-image: var(--gradient-overlay),
-    url("fundo_parceiros/fundo-mobius.png");
+  background-image:
+    var(--gradient-overlay), url("fundo_parceiros/fundo-mobius.png");
   background-position: center 90px;
 }
 
@@ -707,27 +877,6 @@ body.dark-theme .text-info-in-inside {
   font-family: "Pathway Gothic One", sans-serif;
   text-shadow: var(--shadow);
   color: white;
-}
-
-/* Responsividade para Celulares */
-@media (max-width: 768px) {
-  .container-numbers {
-    gap: 30px;
-    /* Reduz o espaço no mobile */
-    flex-direction: column;
-    /* Coloca um número embaixo do outro */
-  }
-
-  .numbers-text {
-    font-size: 2.8rem;
-    /* Diminui um pouco o tamanho da fonte */
-  }
-
-  .numbers-text-label {
-    font-size: 1.2rem;
-    padding-left: 0;
-    /* Remove o padding que pode desalinhá-los no centro */
-  }
 }
 
 /* ================= BOTÃO VOLTAR AO TOPO ================= */
@@ -762,7 +911,7 @@ body.dark-theme .text-info-in-inside {
   transform: scale(1.1);
 }
 
-/* se n der certo  */
+/* ================= NAVBAR LATERAL ================= */
 .navbar {
   display: flex;
   background-color: transparent;
@@ -773,14 +922,9 @@ body.dark-theme .text-info-in-inside {
   transform: translateY(-50%);
   z-index: 99;
   opacity: 1;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.navbar.scrolled {
-  opacity: 0.8;
-  /* Torna a navbar ligeiramente transparente ao rolar */
-  transform: translateY(-40%);
-  /* Desloca a navbar para cima um pouco */
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .navbar ul {
@@ -800,7 +944,7 @@ body.dark-theme .text-info-in-inside {
   box-shadow: 0 10px 50px #2e7d3231;
 }
 
-.navbar li+li {
+.navbar li + li {
   margin-top: 0.75rem;
 }
 
@@ -814,7 +958,9 @@ body.dark-theme .text-info-in-inside {
   height: 3rem;
   border-radius: 8px;
   position: relative;
-  transition: color 0.15s ease, background-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .navbar a:hover,
@@ -825,9 +971,17 @@ body.dark-theme .text-info-in-inside {
 }
 
 .navbar a img {
-  width: 100%;
+  width: 30px;
   height: auto;
   border-radius: 8px;
+  object-fit: contain;
+}
+
+/* Ajuste para quando o item está ativo/hover */
+.navbar a:hover img,
+.navbar a:focus img,
+.navbar a.active img {
+  filter: brightness(1.1); /* Pequeno realce visual */
 }
 
 .navbar a span {
@@ -841,7 +995,9 @@ body.dark-theme .text-info-in-inside {
   transform-origin: center left;
   transform: scale(0);
   opacity: 0;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
 }
 
 .navbar a:hover span,
@@ -862,15 +1018,6 @@ body.dark-theme .text-info-in-inside {
   top: 50%;
   transform: translateY(-50%) rotate(45deg);
   border-radius: 3px;
-}
-
-.navbar #redes ul li a {
-  transition: var(--transition);
-}
-
-.navbar #redes ul li a:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
 }
 
 /* Chamada para novos professores no final da seção */
@@ -896,15 +1043,6 @@ body.dark-theme .text-info-in-inside {
   margin-top: 0;
 }
 
-/* Ajuste de cor se o fundo for claro (opcional) */
-.light-mode .professores-footer h3 {
-  color: var(--dark-bg);
-}
-
-.light-mode .professores-footer {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
 /* Chamada para parceiros no final da seção */
 .parceiros-footer {
   text-align: center;
@@ -928,12 +1066,7 @@ body.dark-theme .text-info-in-inside {
   margin-top: 0;
 }
 
-/* Ajuste de cor do ícone e botão se necessário */
-.parceiros-footer .btn-entrar {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-}
-/* --- FAQ SECTION --- */
+/* ================= FAQ SECTION ================= */
 .faq-section {
   padding: 100px 20px;
   background-color: var(--bg-light);
@@ -981,7 +1114,9 @@ body.dark-theme .text-info-in-inside {
   max-height: 0;
   overflow: hidden;
   /* Transição suave de tempo e movimento */
-  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+  transition:
+    max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.3s ease;
   background-color: rgba(0, 0, 0, 0.02);
 }
 
@@ -1027,21 +1162,7 @@ body.dark-theme .text-info-in-inside {
   color: var(--primary-color);
 }
 
-/* Adicione isto na sua seção de Dark Mode no style.css */
-.dark-theme .faq-item {
-  background: #1e1e1e;
-  color: var(--text-light);
-}
-
-.dark-theme .faq-answer {
-  background-color: #252525;
-}
-
-.dark-theme .faq-question {
-  color: var(--text-light);
-}
-
-/* --- FILTROS MODERNOS (Alinhamento em Linha Única) --- */
+/* ================= FILTROS MODERNOS ================= */
 .filters {
   display: flex;
   flex-direction: row; /* Força um ao lado do outro */
@@ -1058,7 +1179,6 @@ body.dark-theme .text-info-in-inside {
   /* Ajuste de tamanho para caber tudo em uma linha */
   padding: 8px 15px;
   font-size: 0.85rem;
-
   border: 2px solid var(--primary-color);
   background: transparent;
   color: var(--primary-color);
@@ -1070,20 +1190,6 @@ body.dark-theme .text-info-in-inside {
   flex: 0 1 auto; /* Permite que o botão encolha se a tela for mini */
 }
 
-/* Ajuste extremo para telas muito pequenas (ex: iPhone SE) */
-@media (max-width: 400px) {
-  .filters {
-    gap: 4px; /* Espaço mínimo entre botões */
-    padding: 10px 2px;
-  }
-
-  .filter-btn {
-    padding: 6px 10px; /* Botão mais "magro" */
-    font-size: 0.7rem; /* Letra pequena o suficiente para caber os 4 */
-    border-width: 1.5px;
-  }
-}
-
 /* Efeito Ativo e Hover */
 .filter-btn:hover,
 .filter-btn.active {
@@ -1091,16 +1197,6 @@ body.dark-theme .text-info-in-inside {
   color: white;
   /* Removido o transform: translateY para garantir que nada seja cortado */
   box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
-}
-
-/* Tema Escuro */
-body.dark-theme .filter-btn {
-  border-color: var(--accent-color);
-  color: var(--accent-color);
-}
-body.dark-theme .filter-btn.active {
-  background: var(--accent-color);
-  color: #000;
 }
 
 /* ================= SEÇÃO PROFESSORES ================= */
@@ -1130,11 +1226,10 @@ body.dark-theme .filter-btn.active {
   flex-direction: column;
   max-height: 500px;
   min-height: 500px;
-  transition: var(--transition) !important;
 }
 
 .card-professor:hover {
-  transform: translateY(-10px) !important;
+  transform: translateY(-10px);
   border-color: var(--accent-color);
 }
 
@@ -1201,19 +1296,12 @@ body.dark-theme .filter-btn.active {
   transform: scale(1.2);
 }
 
-/* Ajuste Dark Mode */
-body.dark-theme .card-professor {
-  background: #1e1e1e;
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
 .swiper {
   width: 100%;
   padding: 40px 50px !important;
   /* Espaço para a sombra do card não cortar */
 }
 
-/* No seu style.css, na parte dos professores */
 .swiper-slide {
   height: auto;
   display: flex;
@@ -1231,56 +1319,6 @@ body.dark-theme .card-professor {
 
 .swiper-pagination-bullet-active {
   background: var(--primary-color) !important;
-}
-
-/* Adicione isto ao seu style.css */
-.swiper-slide[style*="display: none"] {
-  display: none !important;
-  width: 0 !important;
-  margin: 0 !important;
-}
-
-/* ================= BOTTOM NAVIGATION (MOBILE ONLY) ================= */
-.bottom-nav {
-  display: none;
-  /* Escondido por padrão (Desktop) */
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 65px;
-  background: rgba(255, 255, 255, 0.95);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 1002;
-  /* Acima de tudo */
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: var(--text-dark);
-  font-size: 10px;
-  font-weight: bold;
-  transition: var(--transition);
-}
-
-.nav-item img {
-  width: 24px;
-  height: 24px;
-  margin-bottom: 4px;
-}
-
-.nav-item:active {
-  transform: scale(0.9);
-  color: var(--primary-color);
 }
 
 /* ================= FOOTER MODERNIZADO ================= */
@@ -1346,7 +1384,7 @@ body.dark-theme .card-professor {
   margin-top: 10px;
 }
 
-/* Definições do Tema Escuro */
+/* ================= DARK THEME ================= */
 body.dark-theme {
   --bg-light: #121212;
   --white: #1e1e1e;
@@ -1363,58 +1401,13 @@ body.dark-theme p,
 body.dark-theme .text-info-out,
 body.dark-theme .text-info-in-inside,
 body.dark-theme h1,
-body.dark-theme .frase-kant {
-  color: var(--text-dark) !important;
-}
-
-/* Ajustes específicos do Footer no Dark Mode */
-body.dark-theme .main-footer {
-  background-color: rgba(18, 18, 18, 0.9);
-  /* Fundo escuro com transparência */
-  border-top-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Garante que os parágrafos e links fiquem brancos */
+body.dark-theme .frase-kant,
 body.dark-theme .main-footer p,
 body.dark-theme .footer-links a,
 body.dark-theme .footer-bottom p {
-  color: #ffffff !important;
+  color: var(--text-dark) !important;
 }
 
-/* Mantém os títulos e a frase de desenvolvimento em verde */
-body.dark-theme .footer-links h4,
-body.dark-theme .footer-contact h4,
-body.dark-theme .dev-team {
-  color: var(--primary-color) !important;
-}
-
-/* Efeito hover nos links no modo escuro */
-body.dark-theme .footer-links a:hover {
-  color: var(--accent-color) !important;
-}
-
-/* Ajuste para o card de listas (que tem um fundo verde clarinho no Light Mode) */
-body.dark-theme .box-comunidade-listas-efeito {
-  background: rgba(46, 125, 50, 0.1);
-  /* Verde escuro transparente */
-  border-left-color: var(--primary-color);
-}
-
-body.dark-theme .box-comunidade-listas-efeito p {
-  color: #e0e0e0 !important;
-}
-
-/* Container no Header */
-/* Container no Header (definido mais abaixo com ajustes finais) */
-
-/* Ajuste para o Dark Mode Ativo */
-body.dark-theme #dark-mode-toggle {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--whatsapp-color);
-  color: var(--whatsapp-color);
-}
-
-/* Ajustes específicos para o Dark Mode */
 body.dark-theme .secao {
   background-color: #121212;
   color: var(--text-dark);
@@ -1425,18 +1418,81 @@ body.dark-theme .box-comunidade {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+body.dark-theme .text-info-in-inside {
+  color: #ffffff !important;
+}
+
 body.dark-theme .navbar ul {
   background-color: rgba(30, 30, 30, 0.6);
   /* Glassmorphism escuro */
 }
 
-body.dark-theme header,
-body.dark-theme .bottom-nav {
+body.dark-theme header {
   background: rgba(18, 18, 18, 0.9);
 }
 
+body.dark-theme .main-footer {
+  background-color: rgba(18, 18, 18, 0.9);
+  /* Fundo escuro com transparência */
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .footer-links h4,
+body.dark-theme .footer-contact h4,
+body.dark-theme .dev-team {
+  color: var(--primary-color) !important;
+}
+
+body.dark-theme .footer-links a:hover {
+  color: var(--accent-color) !important;
+}
+
+body.dark-theme .box-comunidade-listas-efeito {
+  background: rgba(46, 125, 50, 0.1);
+  /* Verde escuro transparente */
+  border-left-color: var(--primary-color);
+}
+
+body.dark-theme .box-comunidade-listas-efeito p {
+  color: #e0e0e0 !important;
+}
+
+body.dark-theme .faq-item {
+  background: #1e1e1e;
+  color: var(--text-light);
+}
+
+body.dark-theme .faq-answer {
+  background-color: #252525;
+}
+
+body.dark-theme .faq-question {
+  color: var(--text-light);
+}
+
+body.dark-theme .filter-btn {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+body.dark-theme .filter-btn.active {
+  background: var(--accent-color);
+  color: #000;
+}
+
+body.dark-theme .card-professor {
+  background: #1e1e1e;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ajuste para o Dark Mode Ativo */
+body.dark-theme #dark-mode-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--whatsapp-color);
+  color: var(--whatsapp-color);
+}
+
 /* Container para alinhar o toggle no header */
-/* Container no Header */
 .dark-mode-container {
   display: flex;
   align-items: center;
@@ -1466,8 +1522,6 @@ body.dark-theme .bottom-nav {
 }
 
 #dark-mode-toggle:hover {
-  /*transform: scale(1.1) rotate(15deg);*/
-  /* Leve inclinação ao passar o mouse */
   background: var(--primary-color);
   color: white;
   box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
@@ -1478,21 +1532,14 @@ body.dark-theme .bottom-nav {
   line-height: 1;
 }
 
-/* Ajuste para o Dark Mode Ativo */
-body.dark-theme #dark-mode-toggle {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--whatsapp-color);
-  color: var(--whatsapp-color);
+#dark-mode-toggle [data-lucide] {
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
 }
 
-/* Transição suave para todos os elementos quando mudar o tema */
-body,
-body *,
-header,
-footer,
-.secao {
-  transition: background-color 0.5s ease, color 0.5s ease,
-    border-color 0.5s ease, box-shadow 0.5s ease !important;
+#dark-mode-toggle:hover [data-lucide] {
+  transform: rotate(15deg) scale(1.1);
 }
 
 .icon-sun {
@@ -1511,295 +1558,17 @@ footer,
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z'/></svg>");
 }
 
-#dark-mode-toggle [data-lucide] {
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-#dark-mode-toggle:hover [data-lucide] {
-  transform: rotate(15deg) scale(1.1);
-}
-
-/* ================= RESPONSIVIDADE E BOTTOM NAV E DARK MODE ================= */
-@media (max-width: 768px) {
-  .dark-mode-container {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    margin-right: 0;
-  }
-}
-
-/* ================= RESPONSIVIDADE E BOTTOM NAV ================= */
-@media (max-width: 768px) {
-  .main-footer {
-    padding-bottom: 120px;
-    text-align: center;
-  }
-
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-}
-
-/* RESPONSIVIDADE: Mostrar apenas no mobile */
-@media (min-width: 1025px) {
-  .bottom-nav {
-    display: none !important;
-    /* Garante que não apareça no Desktop */
-  }
-}
-
-@media (max-width: 1024px) {
-  .bottom-nav {
-    display: flex;
-    /* Aparece no mobile/tablet */
-  }
-
-  /* Ajuste o botão Voltar ao Topo para não ficar em cima do menu */
-  #backToTop {
-    bottom: 80px;
-  }
-}
-
-/* ================= RESPONSIVIDADE E BOTTOM NAV ================= */
-
-@media (max-width: 1024px) {
-  /* Esconde a barra lateral antiga se ela existir */
-  .navbar {
-    display: none !important;
-  }
-}
-
-@media (max-width: 768px) {
-  /* 1. Ajuste do Header: Apenas a Logo centralizada */
-  header {
-    justify-content: center;
-    padding: 10px;
-  }
-
-  header .menu,
-  header #link {
-    display: none !important;
-    /* Remove o menu e o botão do topo */
-  }
-
-  .logo {
-    width: 60px;
-    height: 60px;
-  }
-
-  /* 2. Ativação da Bottom Nav */
-  .bottom-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background: rgba(255, 255, 255, 0.98);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    justify-content: space-around;
-    align-items: center;
-    z-index: 2000;
-    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
-    padding-bottom: 5px;
-  }
-
-  .nav-item {
-    text-decoration: none;
-    color: var(--primary-color);
-    font-family: "Pathway Gothic One", sans-serif;
-    font-size: 1rem;
-    font-weight: bold;
-  }
-
-  /* Estilo do ícone do WhatsApp que "salta" da barra */
-  .zap-highlight img {
-    width: 55px;
-    height: 55px;
-    margin-top: 40px;
-    background: white;
-    border-radius: 50%;
-    padding: 5px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  /* 3. Ajuste do Botão Voltar ao Topo para não sobrepor a barra */
-  #backToTop {
-    bottom: 85px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
-  }
-
-  /* 4. Ajustes de texto nas seções */
-  .secao {
-    padding: 80px 20px 100px;
-  }
-
-  .title h1 {
-    font-size: 2.5rem;
-  }
-
-  .frase-kant {
-    font-size: 1.1rem;
-  }
-}
-
-/* Animação de surgimento da barra */
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@media (max-width: 768px) {
-  .bottom-nav {
-    display: flex;
-    /* */
-    animation: slideUp 0.6s ease-out;
-    /* Nova animação */
-  }
-
-  /* Feedback visual ao tocar nos itens */
-  .nav-item:active {
-    transform: scale(0.9);
-    transition: 0.1s;
-    color: var(--accent-color);
-  }
-}
-
-@keyframes pulseZap {
-  0% {
-    transform: translateY(-30px) scale(1);
-  }
-
-  50% {
-    transform: translateY(-35px) scale(1.1);
-  }
-
-  100% {
-    transform: translateY(-30px) scale(1);
-  }
-}
-
-@media (max-width: 768px) {
-  .zap-highlight img {
-    animation: pulseZap 2s infinite ease-in-out;
-    /* Pulsação suave */
-  }
-}
-
-@media (max-width: 768px) {
-  .js-enabled .box-comunidade {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease-out;
-  }
-
-  .js-enabled .secao.visible .box-comunidade {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Delay para o segundo e terceiro card (efeito cascata) */
-  .box-comunidade:nth-child(2) {
-    transition-delay: 0.2s;
-  }
-
-  .box-comunidade:nth-child(3) {
-    transition-delay: 0.4s;
-  }
-}
-
-/* ================= AJUSTES MOBILE: espaçamentos e fontes ================= */
-@media (max-width: 768px) {
-  /* Evita que o header fixo sobreponha o conteúdo */
-  main {
-    margin-top: 88px;
-    padding-bottom: 96px;
-  }
-
-  /* Grid mais simples e espaçamento reduzido */
-  .container-comunidades {
-    gap: 18px;
-    padding: 8px 6px;
-    grid-template-columns: 1fr;
-  }
-
-  /* Cards ocupando menos espaço vertical e com padding interno adequado */
-  .box-comunidade {
-    padding: 12px;
-    border-radius: 14px;
-  }
-
-  .box-comunidade-top {
-    padding: 12px;
-    gap: 12px;
-    min-height: 64px;
-  }
-
-  .logo-comunidade {
-    width: 48px;
-    height: 48px;
-  }
-
-  .text-info-in {
-    font-size: 1.4rem;
-  }
-
-  .text-info-in-inside {
-    padding: 14px;
-    font-size: 0.98rem;
-  }
-
-  .container-numbers {
-    gap: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  main {
-    margin-top: 76px;
-    padding-bottom: 140px;
-  }
-
-  .container-comunidades {
-    gap: 12px;
-    padding: 6px 6px;
-  }
-
-  .box-comunidade {
-    padding: 10px;
-  }
-
-  .box-comunidade-top {
-    padding: 10px;
-    min-height: 56px;
-  }
-
-  .logo {
-    width: 56px;
-    height: 56px;
-  }
-
-  .text-info-in {
-    font-size: 1.15rem;
-  }
-
-  .text-info-in-inside {
-    padding: 12px;
-    font-size: 0.95rem;
-  }
+/* Transição suave para todos os elementos quando mudar o tema */
+body,
+body *,
+header,
+footer,
+.secao {
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease !important;
 }
 
 /* ================= MOBILE MENU (HAMBURGUER + SLIDE DOWN) ================= */
@@ -1826,7 +1595,9 @@ footer,
   background: var(--text-dark);
   display: block;
   position: relative;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
 }
 
 .hamburger .bar:before,
@@ -1837,7 +1608,9 @@ footer,
   width: 22px;
   height: 2px;
   background: var(--text-dark);
-  transition: transform 0.3s ease, top 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    top 0.3s ease;
 }
 
 .hamburger .bar:before {
@@ -1874,7 +1647,9 @@ footer,
   backdrop-filter: blur(8px);
   z-index: 1050;
   opacity: 0;
-  transition: height 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+  transition:
+    height 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease;
 }
 
 .mobile-menu.open {
@@ -1901,73 +1676,13 @@ footer,
   color: var(--primary-color);
 }
 
-/* removido: botão de fechar separado; usamos o próprio hambúrguer como ação de fechar (seta) */
-
-/* Ajustes no Dark Mode para o mobile menu */
-body.dark-theme .mobile-menu {
-  background: rgba(8, 8, 8, 0.98);
-}
-
-body.dark-theme .mobile-menu .inner a {
-  color: #ffffff;
-}
-
-body.dark-theme .mobile-menu .inner a:hover {
-  color: var(--accent-color);
-}
-
-/* removed close-btn dark-mode styles (close button removed) */
-
-/* Hambúrguer em dark mode */
-body.dark-theme .hamburger .bar,
-body.dark-theme .hamburger .bar:before,
-body.dark-theme .hamburger .bar:after {
-  background: #ffffff;
-}
-
-/* Mostrar o hambúrguer no mobile e garantir que logo fique central */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-
-  header {
-    justify-content: center;
-    padding: 10px 16px;
-  }
-
-  /* ajusta posição do toggle de tema para não sobrepor */
-  .dark-mode-container {
-    right: 72px;
-    position: absolute;
-    top: 12px;
-  }
-}
-
-#sobre {
-  width: 100%;
-  min-height: 100dvh;
-  /* dvh = Dynamic Viewport Height (perfeito para iPhone) */
-  background-size: cover;
-  background-position: center center;
-  background-attachment: scroll;
-  /* Obrigatório para mobile */
-}
-
-@media (min-width: 1024px) {
-  #sobre {
-    background-attachment: fixed;
-    /* Parallax só no PC */
-  }
-}
-
 /* ================= SOCIAL FAB (mobile) ================= */
 .social-fab {
   position: fixed;
-  right: 18px;
-  bottom: 140px;
+  right: 20px;
+  bottom: 20px;
   /* acima do botão Voltar ao Topo por padrão */
-  z-index: 1400;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1988,23 +1703,30 @@ body.dark-theme .hamburger .bar:after {
   font-size: 1.2rem;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
 }
 
 .social-actions {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 10px;
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
-  transition: opacity 0.28s ease, transform 0.28s ease;
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
+  margin-bottom: 15px;
 }
 
 .social-fab.open .social-actions {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  display: flex;
 }
 
 .social-btn {
@@ -2015,7 +1737,10 @@ body.dark-theme .hamburger .bar:after {
   align-items: center;
   justify-content: center;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    opacity 0.16s ease;
 }
 
 .social-btn img {
@@ -2041,36 +1766,304 @@ body.dark-theme .hamburger .bar:after {
   background-color: rgba(37, 211, 101, 0.26);
 }
 
+.social-btn.telegram {
+  background-color: rgba(0, 136, 204, 0.25);
+}
+
 .social-btn:hover {
   transform: translateY(-4px) scale(1.03);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
-/* Quando o FAB estiver fechado, manter as ações ocultas com pequena translação */
-.social-fab:not(.open) .social-actions {
-  pointer-events: none;
+/* ================= SEÇÃO SOBRE ================= */
+#sobre {
+  width: 100%;
+  min-height: 100dvh;
+  /* dvh = Dynamic Viewport Height (perfeito para iPhone) */
+  background-size: cover;
+  background-position: center center;
+  background-attachment: scroll;
+  /* Obrigatório para mobile */
+}
+
+/* ================= ANIMAÇÕES ================= */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseZap {
+  0% {
+    transform: translateY(-30px) scale(1);
+  }
+  50% {
+    transform: translateY(-35px) scale(1.1);
+  }
+  100% {
+    transform: translateY(-30px) scale(1);
+  }
+}
+
+/* ================= RESPONSIVIDADE ================= */
+
+/* Timeline Responsividade Mobile */
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 30px;
+    transform: none;
+  }
+  .timeline-icon {
+    left: 30px;
+    transform: translateX(-50%);
+  }
+  .timeline-item {
+    justify-content: flex-start;
+    padding-left: 70px;
+  }
+  .timeline-content {
+    width: 100%;
+  }
+}
+
+/* Responsividade para Celulares */
+@media (max-width: 768px) {
+  .container-numbers {
+    gap: 30px;
+    /* Reduz o espaço no mobile */
+    flex-direction: column;
+    /* Coloca um número embaixo do outro */
+  }
+
+  .numbers-text {
+    font-size: 2.8rem;
+    /* Diminui um pouco o tamanho da fonte */
+  }
+
+  .numbers-text-label {
+    font-size: 1.2rem;
+    padding-left: 0;
+    /* Remove o padding que pode desalinhá-los no centro */
+  }
+}
+
+/* Ajuste extremo para telas muito pequenas (ex: iPhone SE) */
+@media (max-width: 400px) {
+  .filters {
+    gap: 4px; /* Espaço mínimo entre botões */
+    padding: 10px 2px;
+  }
+
+  .filter-btn {
+    padding: 6px 10px; /* Botão mais "magro" */
+    font-size: 0.7rem; /* Letra pequena o suficiente para caber os 4 */
+    border-width: 1.5px;
+  }
+}
+
+/* Responsividade: Social FAB apenas no mobile */
+@media (min-width: 1025px) {
+  .social-fab {
+    display: none;
+  }
+
+  #sobre {
+    background-attachment: fixed;
+    /* Parallax só no PC */
+  }
 }
 
 @media (max-width: 1024px) {
-  /* garante que o FAB apareça apenas em telas menores */
   .social-fab {
     display: flex;
   }
 }
 
-@media (min-width: 1025px) {
-  .social-fab {
-    display: none;
+/* Esconde a barra lateral antiga em mobile */
+@media (max-width: 1024px) {
+  .navbar {
+    display: none !important;
   }
 }
 
-/* Quando o menu móvel estiver aberto, esconder elementos flutuantes verdes para ficar limpo */
-.menu-open .social-fab,
-.menu-open .bottom-nav,
-.menu-open #link {
-  display: none !important;
+/* Mobile específico (768px e abaixo) */
+@media (max-width: 768px) {
+  /* 1. Ajuste do Header: Apenas a Logo centralizada */
+  header {
+    justify-content: center;
+    padding: 10px;
+  }
+
+  header .menu,
+  header #link {
+    display: none !important;
+    /* Remove o menu e o botão do topo */
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* 2. Ajuste do Botão Voltar ao Topo */
+  #backToTop {
+    bottom: 30px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+  }
+
+  /* 3. Ajustes de texto nas seções */
+  .secao {
+    padding: 80px 20px 60px;
+  }
+
+  .title h1 {
+    font-size: 2.5rem;
+  }
+
+  .frase-kant {
+    font-size: 1.1rem;
+  }
+
+  /* Mostrar o hambúrguer no mobile */
+  .hamburger {
+    display: flex;
+  }
+
+  header {
+    justify-content: center;
+    padding: 10px 16px;
+  }
+
+  /* ajusta posição do toggle de tema para não sobrepor */
+  .dark-mode-container {
+    right: 72px;
+    position: absolute;
+    top: 12px;
+    margin-right: 0;
+  }
+
+  /* Ajustes para cards de comunidades */
+  .container-comunidades {
+    gap: 18px;
+    padding: 8px 6px;
+  }
+
+  .box-comunidade {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .box-comunidade-top {
+    padding: 12px;
+    gap: 12px;
+    min-height: 64px;
+  }
+
+  .logo-comunidade {
+    width: 48px;
+    height: 48px;
+  }
+
+  .text-info-in {
+    font-size: 1.4rem;
+  }
+
+  .text-info-in-inside {
+    padding: 14px;
+    font-size: 0.98rem;
+  }
+
+  .container-numbers {
+    gap: 12px;
+  }
+
+  /* Evita que o header fixo sobreponha o conteúdo */
+  main {
+    margin-top: 88px;
+    padding-bottom: 96px;
+  }
+
+  .main-footer {
+    padding-bottom: 120px;
+    text-align: center;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 
+@media (max-width: 480px) {
+  .container-comunidades {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .box-comunidade {
+    flex: 1 1 100%; /* No telemóvel, ocupa a largura toda */
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .social-fab {
+    right: 12px;
+    bottom: 130px;
+  }
+
+  .social-toggle {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+
+  .social-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  main {
+    margin-top: 76px;
+    padding-bottom: 140px;
+  }
+
+  .container-comunidades {
+    gap: 12px;
+    padding: 6px 6px;
+  }
+
+  .box-comunidade {
+    padding: 10px;
+  }
+
+  .box-comunidade-top {
+    padding: 10px;
+    min-height: 56px;
+  }
+
+  .logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .text-info-in {
+    font-size: 1.15rem;
+  }
+
+  .text-info-in-inside {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Tablets e telas médias */
 @media (max-width: 992px) {
   header {
     padding: 12px 3%;
@@ -2083,4 +2076,228 @@ body.dark-theme .hamburger .bar:after {
   .menu a {
     font-size: 1.1rem;
   }
+}
+
+/* Quando o menu móvel estiver aberto, esconder elementos flutuantes */
+.menu-open .social-fab,
+.menu-open #link {
+  display: none !important;
+}
+
+/* Classes para JavaScript (se necessário) */
+.secao.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hambúrguer em dark mode */
+body.dark-theme .hamburger .bar,
+body.dark-theme .hamburger .bar:before,
+body.dark-theme .hamburger .bar:after {
+  background: #ffffff;
+}
+
+/* Ajustes no Dark Mode para o mobile menu */
+body.dark-theme .mobile-menu {
+  background: rgba(8, 8, 8, 0.98);
+}
+
+body.dark-theme .mobile-menu .inner a {
+  color: #ffffff;
+}
+
+body.dark-theme .mobile-menu .inner a:hover {
+  color: var(--accent-color);
+}
+
+/* ================= GRID NO MOBILE PARA PROFESSORES ================= */
+
+@media (max-width: 768px) {
+  /* Desativa completamente o swiper no mobile */
+  .mySwiper {
+    display: block !important;
+    padding: 0 15px !important;
+  }
+
+  .swiper-wrapper {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    width: 100% !important;
+    transform: none !important;
+    height: auto !important;
+  }
+
+  .swiper-slide {
+    width: 100% !important;
+    opacity: 1 !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  /* Remove controles do swiper */
+  .swiper-button-next,
+  .swiper-button-prev,
+  .swiper-pagination {
+    display: none !important;
+  }
+
+  /* Ajusta os cards */
+  .card-professor {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto;
+    max-height: none;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Foto responsiva mantendo proporção */
+  .foto-professor {
+    height: 300px;
+    width: 100%;
+  }
+
+  .foto-professor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* Info responsiva */
+  .info-professor {
+    padding: 25px 20px;
+    flex: 1;
+  }
+
+  .info-professor h3 {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .info-professor h2 {
+    font-size: 1.2rem;
+    margin: 5px 0;
+  }
+
+  .info-professor p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 15px;
+  }
+
+  /* Ajusta os filtros para mobile */
+  .filters {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 10px;
+  }
+
+  .filter-btn {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .card-professor {
+    width: 100%;
+    min-height: 500px;
+  }
+
+  .foto-professor {
+    height: 230px;
+  }
+
+  .info-professor p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+
+/* ================= BOTTOM NAV (MOBILE) ================= */
+.bottom-nav {
+  display: none; /* desktop por padrão */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1002;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-size: 10px;
+  font-weight: bold;
+  transition: var(--transition);
+}
+
+.nav-item img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+.nav-item:active {
+  transform: scale(0.9);
+  color: var(--primary-color);
+}
+
+/* Dark mode para bottom nav */
+body.dark-theme .bottom-nav {
+  background: rgba(18, 18, 18, 0.9);
+}
+
+/* Ativar em mobile */
+@media (max-width: 1024px) {
+  .bottom-nav {
+    display: flex;
+  }
+
+   .navbar {
+    display: none !important;
+  }
+
+  #backToTop {
+    bottom: 80px;
+  }
+
+}
+
+/* Melhor transição para elementos principais */
+header,
+.secao,
+.box-comunidade,
+.box-redes,
+.card-professor,
+.faq-item,
+.main-footer {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* Evita repaints desnecessários no body */
+body {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
 }
