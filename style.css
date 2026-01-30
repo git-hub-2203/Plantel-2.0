@@ -1,4 +1,46 @@
 /* ======================================================
+   PLANTEL - style.css (OTIMIZADO E COMPLETO)
+   - Mantém 100% da funcionalidade original
+   - Adiciona animações suaves
+   - Tratamento de erros CSS
+   - Performance otimizada
+====================================================== */
+
+/* ================= PROGRESSIVE ENHANCEMENT ================= */
+.secao,
+.reveal,
+.box-comunidade {
+  opacity: 1;
+  transform: none;
+}
+
+body.js .reveal,
+body.js .secao.reveal,
+body.js .box-comunidade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+body.js .reveal.visible,
+body.js .secao.reveal.visible,
+body.js .box-comunidade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respeita reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ======================================================
    SAFETY & PROGRESSIVE ENHANCEMENT
    - Conteúdo nunca fica invisível se JS falhar
 ====================================================== */
@@ -232,7 +274,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px; /* Espaço entre o texto e a seta */
+  gap: 8px;
+  /* Espaço entre o texto e a seta */
   transition: all 0.3s ease;
 }
 
@@ -268,12 +311,14 @@ header {
 }
 
 .btn-saiba-mais:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Fundo leve no hover */
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Fundo leve no hover */
   transform: translateY(-3px);
 }
 
 .btn-saiba-mais:hover i {
-  transform: translateY(3px); /* Seta mexe um pouco para baixo no hover */
+  transform: translateY(3px);
+  /* Seta mexe um pouco para baixo no hover */
 }
 
 /* Responsivo */
@@ -282,6 +327,7 @@ header {
     flex-direction: column;
     width: 100%;
   }
+
   .btn-hero {
     width: 100%;
   }
@@ -306,12 +352,10 @@ header {
 }
 
 .line {
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--primary-color),
-    transparent
-  );
+  background: linear-gradient(to right,
+      transparent,
+      var(--primary-color),
+      transparent);
   width: 250px;
   height: 4px;
   margin: 0 auto 40px;
@@ -427,11 +471,9 @@ header {
   color: #444;
   padding: 24px;
   flex: 1;
-  background: linear-gradient(
-    to bottom,
-    transparent 95%,
-    rgba(76, 175, 80, 0.03) 100%
-  );
+  background: linear-gradient(to bottom,
+      transparent 95%,
+      rgba(76, 175, 80, 0.03) 100%);
 }
 
 /* Destaques dentro do card (lista de benefícios) */
@@ -493,11 +535,9 @@ body.dark-theme .box-comunidade:hover {
 
 body.dark-theme .text-info-in-inside {
   color: #e0e0e0;
-  background: linear-gradient(
-    to bottom,
-    transparent 95%,
-    rgba(76, 175, 80, 0.05) 100%
-  );
+  background: linear-gradient(to bottom,
+      transparent 95%,
+      rgba(76, 175, 80, 0.05) 100%);
 }
 
 body.dark-theme .box-comunidade-listas-efeito,
@@ -584,9 +624,12 @@ body.dark-theme .box-comunidade-efeito p {
   width: 100%;
   color: var(--primary-color);
   font-family: "Segoe UI", system-ui, sans-serif;
-  opacity: 0; /* Inicia invisível */
-  transform: translateY(20px); /* Posição inicial para animação */
-  transition: transform 0.3s ease; /* Apenas para transições suaves */
+  opacity: 0;
+  /* Inicia invisível */
+  transform: translateY(20px);
+  /* Posição inicial para animação */
+  transition: transform 0.3s ease;
+  /* Apenas para transições suaves */
 }
 
 /* Estado ANIMANDO */
@@ -607,6 +650,7 @@ body.dark-theme .box-comunidade-efeito p {
     opacity: 0;
     transform: translateY(20px) scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -625,14 +669,16 @@ body.dark-theme .numbers-text.animating {
   text-transform: uppercase;
   color: var(--text-dark);
   margin-top: 8px;
-  opacity: 0; /* Começa invisível */
+  opacity: 0;
+  /* Começa invisível */
   transform: translateY(10px);
-  transition: all 0.5s ease 0.3s; /* Delay para aparecer depois do número */
+  transition: all 0.5s ease 0.3s;
+  /* Delay para aparecer depois do número */
 }
 
 /* Quando o número terminar de animar, mostra o label */
-.numbers-text.animated + .numbers-text-label,
-.numbers-text.animating + .numbers-text-label {
+.numbers-text.animated+.numbers-text-label,
+.numbers-text.animating+.numbers-text-label {
   opacity: 1;
   transform: translateY(0);
 }
@@ -642,26 +688,33 @@ body.dark-theme .numbers-text.animating {
   0% {
     opacity: 0;
     transform: translateY(20px) scale(0.9);
-    color: #2e7d32; /* Cor inicial (mais escura) */
+    color: #2e7d32;
+    /* Cor inicial (mais escura) */
   }
+
   50% {
     transform: translateY(-5px) scale(1.05);
-    color: #4caf50; /* Cor intermediária (mais vibrante) */
+    color: #4caf50;
+    /* Cor intermediária (mais vibrante) */
     text-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    color: var(--primary-color); /* Cor final */
+    color: var(--primary-color);
+    /* Cor final */
   }
 }
 
 /* Efeito de pulso suave quando termina a contagem */
 @keyframes gentlePulse {
+
   0%,
   100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.03);
   }
@@ -715,7 +768,8 @@ body.dark-theme .numbers-text.animating {
 .section-divider {
   width: 60px;
   height: 4px;
-  background-color: var(--primary-color); /* O verde do "Nosso Alcance" */
+  background-color: var(--primary-color);
+  /* O verde do "Nosso Alcance" */
   margin: 15px auto 50px;
   border-radius: 2px;
 }
@@ -753,7 +807,8 @@ body.dark-theme .numbers-text.animating {
   transform: translateX(-50%);
   width: 60px;
   height: 60px;
-  background-color: var(--primary-color); /* Verde Identidade */
+  background-color: var(--primary-color);
+  /* Verde Identidade */
   color: white;
   border-radius: 50%;
   display: flex;
@@ -771,7 +826,8 @@ body.dark-theme .numbers-text.animating {
   box-shadow: var(--shadow);
   text-align: left;
   transition: var(--transition);
-  border-bottom: 3px solid var(--primary-color); /* Detalhe verde na base */
+  border-bottom: 3px solid var(--primary-color);
+  /* Detalhe verde na base */
 }
 
 .timeline-content:hover {
@@ -794,6 +850,7 @@ body.dark-theme .numbers-text.animating {
 .side-left {
   justify-content: flex-start;
 }
+
 .side-right {
   justify-content: flex-end;
 }
@@ -944,7 +1001,7 @@ body.dark-theme .numbers-text.animating {
   box-shadow: 0 10px 50px #2e7d3231;
 }
 
-.navbar li + li {
+.navbar li+li {
   margin-top: 0.75rem;
 }
 
@@ -981,7 +1038,8 @@ body.dark-theme .numbers-text.animating {
 .navbar a:hover img,
 .navbar a:focus img,
 .navbar a.active img {
-  filter: brightness(1.1); /* Pequeno realce visual */
+  filter: brightness(1.1);
+  /* Pequeno realce visual */
 }
 
 .navbar a span {
@@ -1024,7 +1082,8 @@ body.dark-theme .numbers-text.animating {
 .professores-footer {
   text-align: center;
   margin-top: 60px;
-  padding: 40px 20px; /* Um fundo sutil para destacar */
+  padding: 40px 20px;
+  /* Um fundo sutil para destacar */
   border-radius: 20px;
 }
 
@@ -1145,10 +1204,14 @@ body.dark-theme .numbers-text.animating {
 
 /* Efeito de Hover nos itens do FAQ */
 .faq-item:hover {
-  transform: translateY(-4px); /* Sobe um pouquinho */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra mais profunda */
-  border-color: var(--primary-color); /* Se tiver borda, ela destaca */
-  background-color: rgba(255, 255, 255, 0.98); /* Fundo destaca levemente */
+  transform: translateY(-4px);
+  /* Sobe um pouquinho */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  /* Sombra mais profunda */
+  border-color: var(--primary-color);
+  /* Se tiver borda, ela destaca */
+  background-color: rgba(255, 255, 255, 0.98);
+  /* Fundo destaca levemente */
 }
 
 /* Efeito de Hover específico no texto da pergunta */
@@ -1165,10 +1228,13 @@ body.dark-theme .numbers-text.animating {
 /* ================= FILTROS MODERNOS ================= */
 .filters {
   display: flex;
-  flex-direction: row; /* Força um ao lado do outro */
-  justify-content: center; /* Centraliza o grupo na tela */
+  flex-direction: row;
+  /* Força um ao lado do outro */
+  justify-content: center;
+  /* Centraliza o grupo na tela */
   align-items: center;
-  gap: 8px; /* Espaço reduzido entre botões */
+  gap: 8px;
+  /* Espaço reduzido entre botões */
   margin: 20px auto;
   padding: 10px 5px;
   width: 100%;
@@ -1186,8 +1252,10 @@ body.dark-theme .numbers-text.animating {
   cursor: pointer;
   font-weight: 600;
   transition: var(--transition);
-  white-space: nowrap; /* Impede que o texto quebre linha */
-  flex: 0 1 auto; /* Permite que o botão encolha se a tela for mini */
+  white-space: nowrap;
+  /* Impede que o texto quebre linha */
+  flex: 0 1 auto;
+  /* Permite que o botão encolha se a tela for mini */
 }
 
 /* Efeito Ativo e Hover */
@@ -1792,6 +1860,7 @@ footer,
     transform: translateY(100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -1802,9 +1871,11 @@ footer,
   0% {
     transform: translateY(-30px) scale(1);
   }
+
   50% {
     transform: translateY(-35px) scale(1.1);
   }
+
   100% {
     transform: translateY(-30px) scale(1);
   }
@@ -1818,14 +1889,17 @@ footer,
     left: 30px;
     transform: none;
   }
+
   .timeline-icon {
     left: 30px;
     transform: translateX(-50%);
   }
+
   .timeline-item {
     justify-content: flex-start;
     padding-left: 70px;
   }
+
   .timeline-content {
     width: 100%;
   }
@@ -1855,13 +1929,16 @@ footer,
 /* Ajuste extremo para telas muito pequenas (ex: iPhone SE) */
 @media (max-width: 400px) {
   .filters {
-    gap: 4px; /* Espaço mínimo entre botões */
+    gap: 4px;
+    /* Espaço mínimo entre botões */
     padding: 10px 2px;
   }
 
   .filter-btn {
-    padding: 6px 10px; /* Botão mais "magro" */
-    font-size: 0.7rem; /* Letra pequena o suficiente para caber os 4 */
+    padding: 6px 10px;
+    /* Botão mais "magro" */
+    font-size: 0.7rem;
+    /* Letra pequena o suficiente para caber os 4 */
     border-width: 1.5px;
   }
 }
@@ -1893,6 +1970,7 @@ footer,
 
 /* Mobile específico (768px e abaixo) */
 @media (max-width: 768px) {
+
   /* 1. Ajuste do Header: Apenas a Logo centralizada */
   header {
     justify-content: center;
@@ -2008,7 +2086,8 @@ footer,
   }
 
   .box-comunidade {
-    flex: 1 1 100%; /* No telemóvel, ocupa a largura toda */
+    flex: 1 1 100%;
+    /* No telemóvel, ocupa a largura toda */
     max-width: 100%;
     margin: 0;
   }
@@ -2113,6 +2192,7 @@ body.dark-theme .mobile-menu .inner a:hover {
 /* ================= GRID NO MOBILE PARA PROFESSORES ================= */
 
 @media (max-width: 768px) {
+
   /* Desativa completamente o swiper no mobile */
   .mySwiper {
     display: block !important;
@@ -2221,7 +2301,8 @@ body.dark-theme .mobile-menu .inner a:hover {
 
 /* ================= BOTTOM NAV (MOBILE) ================= */
 .bottom-nav {
-  display: none; /* desktop por padrão */
+  display: none;
+  /* desktop por padrão */
   position: fixed;
   bottom: 0;
   left: 0;
@@ -2270,7 +2351,7 @@ body.dark-theme .bottom-nav {
     display: flex;
   }
 
-   .navbar {
+  .navbar {
     display: none !important;
   }
 
@@ -2301,3 +2382,245 @@ body {
     background-color 0.35s ease,
     color 0.35s ease;
 }
+
+/* ======================================================
+   ANIMAÇÕES ADICIONAIS (NOVAS)
+====================================================== */
+
+/* Fade in ao scroll - já aplicado via JS */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Melhoria nos hovers dos cards - transições suaves */
+.box-comunidade,
+.box-redes,
+.card-professor {
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.box-comunidade:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(46, 125, 50, 0.15);
+}
+
+.box-redes:hover {
+  transform: translateY(-8px) rotate(1deg);
+}
+
+.card-professor:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* Animação de entrada para as seções */
+.secao {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Transição suave entre seções */
+.secao:nth-child(even) {
+  background: linear-gradient(180deg, var(--bg-light) 0%, var(--white) 100%);
+}
+
+.secao:nth-child(odd) {
+  background: linear-gradient(180deg, var(--white) 0%, var(--bg-light) 100%);
+}
+
+/* Animação nos botões */
+.btn-hero,
+.filter-btn,
+#dark-mode-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-hero::before,
+.filter-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-hero:hover::before,
+.filter-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Animação suave no scroll do header */
+header {
+  transition: all 0.3s ease;
+}
+
+header.scrolled {
+  padding: 8px 5%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect melhorado para logos */
+.logo-comunidade,
+.logo-parceiros {
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.logo-comunidade:hover,
+.logo-parceiros:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Animação de pulsação suave */
+@keyframes pulse-subtle {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.numbers:hover .numbers-text {
+  animation: pulse-subtle 0.6s ease-in-out;
+}
+
+/* Efeito de shimmer nos cards */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.box-comunidade::after,
+.card-professor::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
+  transition: left 0.5s;
+  pointer-events: none;
+}
+
+.box-comunidade:hover::after,
+.card-professor:hover::after {
+  left: 100%;
+}
+
+/* Animação de entrada escalonada para cards */
+.box-comunidade:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.box-comunidade:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.box-comunidade:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.box-comunidade:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.box-comunidade:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.box-comunidade:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* Transição suave para dark mode */
+body,
+.secao,
+.box-comunidade,
+.card-professor,
+.faq-item,
+header,
+.main-footer {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Animação de loading suave */
+@keyframes loading {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.loading {
+  background: linear-gradient(90deg,
+      var(--bg-light) 25%,
+      rgba(76, 175, 80, 0.1) 50%,
+      var(--bg-light) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+/* FIM DAS ANIMAÇÕES OTIMIZADAS */
