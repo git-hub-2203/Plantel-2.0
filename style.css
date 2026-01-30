@@ -2347,10 +2347,6 @@ body.dark-theme .bottom-nav {
 
 /* Ativar em mobile */
 @media (max-width: 1024px) {
-  .bottom-nav {
-    display: flex;
-  }
-
   .navbar {
     display: none !important;
   }
@@ -2621,6 +2617,19 @@ header,
       var(--bg-light) 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
+}
+
+/* Esconde a seção de parceiros e seus links apenas em telas menores que 1024px (Tablets e Celulares) */
+@media (max-width: 1024px) {
+
+  #parceiros,
+  .hero-parceiro,
+  .bottom-nav a[href="#parceiros"],
+  /* Esconde do menu inferior mobile */
+  .mobile-menu a[href="#parceiros"] {
+    /* Esconde do menu hambúrguer */
+    display: none !important;
+  }
 }
 
 /* FIM DAS ANIMAÇÕES OTIMIZADAS */
